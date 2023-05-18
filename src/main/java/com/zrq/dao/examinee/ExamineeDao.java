@@ -139,7 +139,7 @@ public interface ExamineeDao{
     @ResultMap("user_exam")
     public MyExam findMyexamById(Integer id);
 
-    @Insert("insert user(username,password,phone,role) values(#{username},#{password},#{phone},2)")
+    @Insert("insert user(username,password,phone,role) values(#{username},#{password},#{phone},#{role})")//edited_by_hyx
     public Integer registUser(User user);
 
     @Update("update user set perimage=#{fileName} where id=#{id}")

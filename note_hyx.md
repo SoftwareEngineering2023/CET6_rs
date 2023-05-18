@@ -115,3 +115,13 @@ dao的interface可以继承它。继承后只需要补充自定义的增删改�
 # READCODE
 
 home頁面主要呈現的那些`common/header`中
+
+它原來有老師，但是register的时候没有做区分。原来只有username，password，repassword，phone。再加一个选项student/teacher/admin
+
+![image-20230518104847398](C:\Users\Heyix\AppData\Roaming\Typora\typora-user-images\image-20230518104847398.png)
+
+在这写死了全是学生。
+
+![image-20230518105100776](C:\Users\Heyix\AppData\Roaming\Typora\typora-user-images\image-20230518105100776.png)
+
+把那个2改成`role`，可以注册老师了。
