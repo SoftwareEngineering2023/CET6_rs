@@ -125,3 +125,57 @@ home頁面主要呈現的那些`common/header`中
 ![image-20230518105100776](C:\Users\Heyix\AppData\Roaming\Typora\typora-user-images\image-20230518105100776.png)
 
 把那个2改成`role`，可以注册老师了。
+
+## 添加试题（考务人员）
+
+### 试题注册
+
+##### paper
+
+试卷编号
+
+试卷名称（一套卷子共用一个试题名称）
+
+出题人
+
+发布时间
+
+考试id
+
+##### 选择题试题
+
+试卷编号
+
+试题编号
+
+题干
+
+4个选项的内容
+
+答案
+
+##### 主观题试题
+
+试卷编号
+
+试题编号
+
+题干
+
+答案
+
+
+
+题干
+
+选项
+
+正确答案
+
+
+
+dao->service->controller
+
+注意那些@
+
+**@RequestMapping**和**@Service**

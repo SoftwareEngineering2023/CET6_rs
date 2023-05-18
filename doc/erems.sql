@@ -55,7 +55,7 @@ CREATE TABLE `exam` (
   `description` varchar(3000) DEFAULT '描述' COMMENT '考试信息描述',
   `time` datetime DEFAULT NULL COMMENT '考试时间',
   `outed` tinyint(2) DEFAULT '0' COMMENT '过期标志，0未过期，1过期',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`)user
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -172,3 +172,63 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2018-06-08 18:28:28
+-- add by hyx
+DROP TABLE IF EXISTS `paper`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+create table `paper`(
+`num` varchar(5) DEFAULT '00000' COMMENT '试卷编号',
+`name` varchar(20) NOT NULL COMMENT '试卷名称',
+`time` datetime DEFAULT NULL COMMENT '发布时间',
+`user_id` int(11) NOT NULL COMMENT '出卷人id',
+`exam_id` int(11) NOT NULL COMMENT '考试id'
+)ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+INSERT INTO `paper` VALUES('00001', '2020年全国大学生英语六级考试', '2020-06-20 09:00:00', '001', '001');
+INSERT INTO `paper` VALUES('00002', '2021年全国大学生英语六级考试', '2021-06-20 09:00:00', '001', '001');
+INSERT INTO `paper` VALUES('00003', '2022年全国大学生英语六级考试', '2022-06-20 09:00:00', '001', '001');
+
+-- 选择题
+DROP TABLE IF EXISTS `selectquestions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+create table `selectquestions`(
+`num` varchar(5) DEFAULT '00000' COMMENT '试题编号',
+`paper_id` varchar(5) DEFAULT '00000' COMMENT '试卷编号',
+`question` varchar(500) NOT NULL COMMENT '题干内容',
+`answer` char(1) NOT NULL COMMENT '正确答案',
+`selectA` varchar(200) NOT NULL COMMENT '选项A',
+`selectB` varchar(200) NOT NULL COMMENT '选项B',
+`selectC` varchar(200) NOT NULL COMMENT '选项C',
+`selectD` varchar(200) NOT NULL COMMENT '选项D'
+)ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+insert into `selectquestions` values
+('00001', '00001', 'The first selectQuestion here: xxxx xxxx xxxx?', 'A', 'answer A', 'answer B', 'answer C', 'answer D');
+insert into `selectquestions` values
+('00002', '00001', 'The second selectQuestion here: xxxx xxxx xxxx?', 'A', 'answer A', 'answer B', 'answer C', 'answer D');
+insert into `selectquestions` values
+('00003', '00001', 'The third selectQuestion here: xxxx xxxx xxxx?', 'A', 'answer A', 'answer B', 'answer C', 'answer D');
+insert into `selectquestions` values
+('00004', '00001', 'The fourth selectQuestion here: xxxx xxxx xxxx?', 'A', 'answer A', 'answer B', 'answer C', 'answer D');
+
+-- 主观题
+DROP TABLE IF EXISTS `fillquestions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+create table `fillquestions`(
+`num` varchar(5) DEFAULT '00000' COMMENT '试题编号',
+`paper_id` varchar(5) DEFAULT '00000' COMMENT '试卷编号',
+`question` varchar(500) NOT NULL COMMENT '题干内容',
+`answer` varchar(500) NOT NULL COMMENT '正确答案'
+)ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+insert into `fillquestions` values
+('00001', '00001', 'The first fillQuestion here: xxxx xxxx xxxx?', 'This is answer for the first question.');
+insert into `fillquestions` values
+('00002', '00001', 'The second fillQuestion here: xxxx xxxx xxxx?', 'This is answer for the second question.');
+insert into `fillquestions` values
+('00003', '00001', 'The third fillQuestion here: xxxx xxxx xxxx?', 'This is answer for the third question.');
+insert into `fillquestions` values
+('00004', '00001', 'The fourth fillQuestion here: xxxx xxxx xxxx?', 'This is answer for the fourth question.');
