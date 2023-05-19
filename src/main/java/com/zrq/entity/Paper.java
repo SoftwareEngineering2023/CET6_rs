@@ -10,17 +10,22 @@ import java.util.Date;
  */
 
 public class Paper {
-    private Integer num;
+    private Integer id;
     private String name;
+
+    private String user_name;//出卷人
+
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date time;
 
-    private int user_id;//出卷人
-    private int exam_id;
 
-    public Integer getId(){return num;}
+    public Paper(String n, String un, Date t) {
+        name = n;
+        user_name = un;
+        time = t;
+    }
+    public Integer getId(){return id;}
     public String getName(){return name;}
-    public Integer getUserId(){return user_id;}
-    public Integer getExamId(){return exam_id;}
+    public String getUser(){return user_name;}
 
 }

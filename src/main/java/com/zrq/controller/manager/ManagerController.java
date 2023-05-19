@@ -1,16 +1,21 @@
 package com.zrq.controller.manager;
 
+import com.zrq.entity.Exam;
 import com.zrq.entity.User;
+import com.zrq.entity.Paper;
 import com.zrq.entity.examinee.Examinee;
+import com.zrq.service.PaperService;
 import com.zrq.service.manager.ManagerService;
 import com.zrq.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -18,10 +23,12 @@ import java.util.Map;
  * Created by zrq on 2018-5-6.
  */
 @Controller
-@RequestMapping("manager")
+@RequestMapping("/manager")
 public class ManagerController {
     @Autowired
     private ManagerService managerService;
+    @Autowired
+    private PaperService paperService;
 
     /**
      * 跳转到个人信息页面
@@ -35,6 +42,7 @@ public class ManagerController {
         System.out.println("MyPagedefault-info");
         return "my-info";
     }
+
 
 
     /**
@@ -100,6 +108,20 @@ public class ManagerController {
         List<User> examineeList=managerService.searchByNameAndExam(name,examId);
         map.put("examineeList",examineeList);
         return "manage";
+    }
+
+    @RequestMapping("savePaper")
+    public String savePaper(String name, String user_name, @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")Date time){
+        Paper paper = new Paper(name, user_name, time);
+
+        if(paper.getId()!=null){//id不空即为更新操作
+            paperService.updatePaper(paper);
+        }else {
+            paperService.savePaper(paper);
+        }
+//        System.out.println(name);
+//        System.out.println("savePaper???");
+        return "registpaper";
     }
 
     /**

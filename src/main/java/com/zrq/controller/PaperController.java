@@ -31,4 +31,6 @@ public class PaperController extends BaseController{
         List<Paper> paperList=paperService.findAll();
         return paperList;
     }
+
+
 }

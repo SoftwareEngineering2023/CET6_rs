@@ -19,4 +19,17 @@ public class PaperService {
 //        System.out.println("findAll");
         return paperDao.findAll();
     }
+
+    /**
+     * 根据id更新考试信息
+     * @param paper
+     * @return
+     */
+    public int updatePaper(Paper paper) {
+        return paperDao.updatePaper(paper);
+    }
+
+    public int savePaper(Paper paper) {
+        return paperDao.savePaper(paper);
+    }
 }

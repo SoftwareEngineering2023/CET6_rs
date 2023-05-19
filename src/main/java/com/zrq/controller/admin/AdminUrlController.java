@@ -269,7 +269,7 @@ public class AdminUrlController {
      */
     @RequestMapping("/a/{url}")
     public String list(@PathVariable("url")String url){
-        url= StringUtil.humpToLine(url);//驼峰法与横线转换
+        url= StringUtil.humpToLine(url);//驼峰法与横线转换 updateExam->update-exam
         return "admin/"+url;
     }
 }

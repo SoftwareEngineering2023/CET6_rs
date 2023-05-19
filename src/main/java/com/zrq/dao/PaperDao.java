@@ -1,5 +1,6 @@
 package com.zrq.dao;
 
+import com.zrq.entity.Exam;
 import com.zrq.entity.Paper;
 import com.zrq.entity.Statistics;
 import org.apache.ibatis.annotations.*;
@@ -15,4 +16,22 @@ public interface PaperDao {
      */
     @Select("select * from paper")
     public List<Paper> findAll();
+
+    /**
+     * 根据id更新考试信息
+     * @param paper
+     * @return
+     */
+    @Update("update paper set name=#{name},time=#{time} where id=#{id}")
+    public int updatePaper(Paper paper);
+
+    /**
+     * 新增考试信息
+     * @param paper
+     * @return
+     */
+    @Insert("insert paper(name,user_name,time) values(#{name},#{user_name},#{time})")
+    @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
+    public int savePaper(Paper paper);
+
 }
