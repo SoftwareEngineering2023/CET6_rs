@@ -13,19 +13,20 @@ public class Paper {
     private Integer id;
     private String name;
 
-    private String user_name;//出卷人
-
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date time;
 
+    private String user_name;//出卷人
 
-    public Paper(String n, String un, Date t) {
-        name = n;
-        user_name = un;
-        time = t;
-    }
+
+    public Paper() {}
     public Integer getId(){return id;}
+    public void setId(Integer id_){id=id_;}
     public String getName(){return name;}
+    public void setName(String name_){name=name_;}
     public String getUser(){return user_name;}
+    public void setUser(String user_name_){user_name=user_name_;}
+    public Date getTime(){return time;}
+    public void setTime(Date time_){time=time_;}
 
 }

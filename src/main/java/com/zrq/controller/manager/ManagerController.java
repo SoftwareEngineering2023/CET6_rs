@@ -112,8 +112,10 @@ public class ManagerController {
 
     @RequestMapping("savePaper")
     public String savePaper(String name, String user_name, @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")Date time){
-        Paper paper = new Paper(name, user_name, time);
-
+        Paper paper = new Paper();//name, user_name, time
+        paper.setName(name);
+        paper.setUser(user_name);
+        paper.setTime(time);
         if(paper.getId()!=null){//id不空即为更新操作
             paperService.updatePaper(paper);
         }else {
@@ -121,7 +123,14 @@ public class ManagerController {
         }
 //        System.out.println(name);
 //        System.out.println("savePaper???");
-        return "registpaper";
+        return "paperlist";
+    }
+
+    @RequestMapping("paper")
+    public String paper(@RequestParam("id")Integer id, Map<String,Object> map){
+        Paper paper=paperService.findById(id);
+        map.put("currentPaper",paper);
+        return "manager/update-questions";
     }
 
     /**

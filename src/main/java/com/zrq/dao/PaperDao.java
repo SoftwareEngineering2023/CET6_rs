@@ -34,4 +34,6 @@ public interface PaperDao {
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
     public int savePaper(Paper paper);
 
+    @Select("select * from paper where id=#{id}")
+    public Paper findById(Integer id);
 }

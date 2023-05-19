@@ -39,8 +39,9 @@
                     str += '<tr>'
                         + '<td>' + count + '</td>'
                         + '<td>' + data[o].name + '</td>'
+                        + '<td>' + data[o].user_name + '</td>'
                         + '<td>' +new Date(data[o].time).Format("yyyy-MM-dd hh:mm:ss")  + '</td>'
-                        + '<td><a href="/erems/admin/exam?id=' + data[o].id + '" class="btn btn-primary">修改</a>'
+                        + '<td><a href="/erems/manager/paper?id=' + data[o].id + '" class="btn btn-primary">试题录入</a>'
                         + '</tr>';
                     count++;
                 }
@@ -68,6 +69,7 @@
                         <tr>
                             <th>序号</th>
                             <th>名称</th>
+                            <th>出卷人</th>
 <!--                            <th>描述</th>-->
                             <th>时间</th>
 <!--                            <th>操作</th>-->

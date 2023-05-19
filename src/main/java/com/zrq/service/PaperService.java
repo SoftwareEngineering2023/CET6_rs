@@ -32,4 +32,8 @@ public class PaperService {
     public int savePaper(Paper paper) {
         return paperDao.savePaper(paper);
     }
+
+    public Paper findById(Integer id){
+        return paperDao.findById(id);
+    }
 }
