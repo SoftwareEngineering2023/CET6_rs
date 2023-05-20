@@ -3,8 +3,11 @@ package com.zrq.controller.manager;
 import com.zrq.entity.Exam;
 import com.zrq.entity.User;
 import com.zrq.entity.Paper;
+import com.zrq.entity.SelectQuestion;
+import com.zrq.entity.FillQuestion;
 import com.zrq.entity.examinee.Examinee;
 import com.zrq.service.PaperService;
+import com.zrq.service.QuestionService;
 import com.zrq.service.manager.ManagerService;
 import com.zrq.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,8 @@ public class ManagerController {
     private ManagerService managerService;
     @Autowired
     private PaperService paperService;
+    @Autowired
+    private QuestionService questionService;
 
     /**
      * 跳转到个人信息页面
@@ -126,11 +131,69 @@ public class ManagerController {
         return "paperlist";
     }
 
+    //跳转到 设置问题 界面
     @RequestMapping("paper")
-    public String paper(@RequestParam("id")Integer id, Map<String,Object> map){
+    public String paper(HttpServletRequest request,@RequestParam("id")Integer id, Map<String,Object> map){
         Paper paper=paperService.findById(id);
+        request.getSession().setAttribute("currentPaper",paper);
         map.put("currentPaper",paper);
-        return "manager/update-questions";
+        return "select-questiontype";
+    }
+
+    @RequestMapping("confirmSelection")
+    public String confirmSelection(HttpServletRequest request,Integer Qtype, Integer paperid, Map<String,Object> map){
+        System.out.println("confirmSelection???");
+        System.out.println(paperid);
+        Paper paper=paperService.findById(paperid);
+        request.getSession().setAttribute("currentPaper",paper);
+        map.put("currentPaper",paper);
+        if(Qtype==0)
+            return "update-selectquestions";
+        else{
+            return "update-fillquestions";
+        }
+    }
+
+    @RequestMapping("saveSelectQuestion")
+    public String saveSelectQuestion(HttpServletRequest request, Integer paperid, String question, Integer answer, String selectA, String selectB, String selectC, String selectD, Map<String,Object> map){
+        //TODO
+        Paper paper=paperService.findById(paperid);
+        request.getSession().setAttribute("currentPaper",paper);
+        map.put("currentPaper",paper);
+        System.out.println("paperid???");
+        System.out.println(paperid);
+
+        SelectQuestion selectQuestion=new SelectQuestion();
+
+        selectQuestion.setPaper(paperid);
+        selectQuestion.setQuestion(question);
+        selectQuestion.setAnswer(answer);
+        selectQuestion.setA(selectA);
+        selectQuestion.setB(selectB);
+        selectQuestion.setC(selectC);
+        selectQuestion.setD(selectD);
+
+        questionService.saveSelect(selectQuestion);
+
+        return "select-questiontype";
+    }
+
+    @RequestMapping("saveFillQuestion")
+    public String saveFillQuestion(HttpServletRequest request, Integer paperid, String question, String answer, Map<String,Object> map){
+        //TODO
+        Paper paper=paperService.findById(paperid);
+        request.getSession().setAttribute("currentPaper",paper);
+        map.put("currentPaper",paper);
+
+        FillQuestion fillQuestion = new FillQuestion();
+
+        fillQuestion.setPaper(paper.getId());
+        fillQuestion.setQuestion(question);
+        fillQuestion.setAnswer(answer);
+
+        questionService.saveFill(fillQuestion);
+
+        return "select-questiontype";
     }
 
     /**

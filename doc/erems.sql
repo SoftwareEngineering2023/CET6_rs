@@ -194,41 +194,43 @@ DROP TABLE IF EXISTS `selectquestions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 create table `selectquestions`(
-`num` varchar(5) DEFAULT '00000' COMMENT '试题编号',
-`paper_id` varchar(5) DEFAULT '00000' COMMENT '试卷编号',
+`id` int(3) NOT NULL AUTO_INCREMENT,
+`paperid` int(5) NOT NULL COMMENT '试卷id',
 `question` varchar(500) NOT NULL COMMENT '题干内容',
-`answer` char(1) NOT NULL COMMENT '正确答案',
+`answer` int(1) NOT NULL COMMENT '正确答案',
 `selectA` varchar(200) NOT NULL COMMENT '选项A',
 `selectB` varchar(200) NOT NULL COMMENT '选项B',
 `selectC` varchar(200) NOT NULL COMMENT '选项C',
-`selectD` varchar(200) NOT NULL COMMENT '选项D'
+`selectD` varchar(200) NOT NULL COMMENT '选项D',
+PRIMARY KEY (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 insert into `selectquestions` values
-('00001', '00001', 'The first selectQuestion here: xxxx xxxx xxxx?', 'A', 'answer A', 'answer B', 'answer C', 'answer D');
+(1, 1, 'The first selectQuestion here: xxxx xxxx xxxx?', 1, 'answer A', 'answer B', 'answer C', 'answer D');
 insert into `selectquestions` values
-('00002', '00001', 'The second selectQuestion here: xxxx xxxx xxxx?', 'A', 'answer A', 'answer B', 'answer C', 'answer D');
+(2, 2,'The second selectQuestion here: xxxx xxxx xxxx?', 2, 'answer A', 'answer B', 'answer C', 'answer D');
 insert into `selectquestions` values
-('00003', '00001', 'The third selectQuestion here: xxxx xxxx xxxx?', 'A', 'answer A', 'answer B', 'answer C', 'answer D');
+(3, 1,'The third selectQuestion here: xxxx xxxx xxxx?', 3, 'answer A', 'answer B', 'answer C', 'answer D');
 insert into `selectquestions` values
-('00004', '00001', 'The fourth selectQuestion here: xxxx xxxx xxxx?', 'A', 'answer A', 'answer B', 'answer C', 'answer D');
+(4, 2,'The fourth selectQuestion here: xxxx xxxx xxxx?', 0, 'answer A', 'answer B', 'answer C', 'answer D');
 
 -- 主观题
 DROP TABLE IF EXISTS `fillquestions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 create table `fillquestions`(
-`num` varchar(5) DEFAULT '00000' COMMENT '试题编号',
-`paper_id` varchar(5) DEFAULT '00000' COMMENT '试卷编号',
+`id` int(3) NOT NULL AUTO_INCREMENT,
+`paper_id` int(5) DEFAULT '00000' COMMENT '试卷id',
 `question` varchar(500) NOT NULL COMMENT '题干内容',
-`answer` varchar(500) NOT NULL COMMENT '正确答案'
+`answer` varchar(500) NOT NULL COMMENT '正确答案',
+PRIMARY KEY (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 insert into `fillquestions` values
-('00001', '00001', 'The first fillQuestion here: xxxx xxxx xxxx?', 'This is answer for the first question.');
+(1, 1, 'The first fillQuestion here: xxxx xxxx xxxx?', 'This is answer for the first question.');
 insert into `fillquestions` values
-('00002', '00001', 'The second fillQuestion here: xxxx xxxx xxxx?', 'This is answer for the second question.');
+(2, 2, 'The second fillQuestion here: xxxx xxxx xxxx?', 'This is answer for the second question.');
 insert into `fillquestions` values
-('00003', '00001', 'The third fillQuestion here: xxxx xxxx xxxx?', 'This is answer for the third question.');
+(3, 1, 'The third fillQuestion here: xxxx xxxx xxxx?', 'This is answer for the third question.');
 insert into `fillquestions` values
-('00004', '00001', 'The fourth fillQuestion here: xxxx xxxx xxxx?', 'This is answer for the fourth question.');
+(4, 2, 'The fourth fillQuestion here: xxxx xxxx xxxx?', 'This is answer for the fourth question.');

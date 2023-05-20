@@ -24,8 +24,8 @@
                                 </tr>
                                 </thead>
                                 <th:block>
-                                <!--    <tbody th:object="${currentExam}">-->
-                                <tbody>
+                                <tbody th:object="${currentExam}">
+<!--                                <tbody>-->
                                 <tr>
                                     <td>名称</td>
                                     <td>
@@ -50,31 +50,31 @@
                                 </tr>
                                 </tbody>
                                 </th:block>
-<!--                                <th:block>-->
-<!--                                    <tbody>-->
-<!--                                    <tr>-->
-<!--                                        <td>名称</td>-->
-<!--                                        <td>-->
-<!--                                            <input type="text" id="name" name="name" class="required" placeholder="名称"-->
-<!--                                                   value="">-->
-<!--                                        </td>-->
-<!--                                    </tr>-->
-<!--                                    <tr>-->
-<!--                                        <td>简介</td>-->
-<!--                                        <td>-->
-<!--                                            <textarea id="description" name="description" class="required" placeholder="简介"-->
-<!--                                                      value="" rows="5"></textarea>-->
-<!--                                        </td>-->
-<!--                                    </tr>-->
-<!--                                    <tr>-->
-<!--                                        <td>考试时间</td>-->
-<!--                                        <td>-->
-<!--                                            <input type="text"  name="time" class="required" placeholder="格式:2018-5-1 10:00:00"-->
-<!--                                                   value="" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii:00" alt="格式:yyyy-MM-dd HH:mm:ss">-->
-<!--                                        </td>-->
-<!--                                    </tr>-->
-<!--                                    </tbody>-->
-<!--                                </th:block>-->
+                                <th:block>
+                                    <tbody>
+                                    <tr>
+                                        <td>名称</td>
+                                        <td>
+                                            <input type="text" id="name" name="name" class="required" placeholder="名称"
+                                                   value="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>简介</td>
+                                        <td>
+                                            <textarea id="description" name="description" class="required" placeholder="简介"
+                                                      value="" rows="5"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>考试时间</td>
+                                        <td>
+                                            <input type="text"  name="time" class="required" placeholder="格式:2018-5-1 10:00:00"
+                                                   value="" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii:00" alt="格式:yyyy-MM-dd HH:mm:ss">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </th:block>
                             </table>
                             <button type="submit" class="btn btn-primary">保存</button>
                             <button class="btn btn-warning">
