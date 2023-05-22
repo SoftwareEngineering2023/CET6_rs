@@ -1,0 +1,22 @@
+@startuml
+actor 教师
+participant "报名系统" as B
+database "数据库" as D
+
+教师 -> B: 访问报名系统
+activate B
+B -> 教师: 显示试卷上传界面
+教师 -> B: 选择试卷文件
+B -> D: 存储试卷信息
+activate D
+D --> B: 返回存储结果
+deactivate D
+B -> 教师: 显示试卷预览
+教师 -> B: 确认上传
+B -> D: 更新试卷状态
+activate D
+D --> B: 返回更新结果
+deactivate D
+B -> 教师: 返回上传成功信息
+deactivate B
+@enduml

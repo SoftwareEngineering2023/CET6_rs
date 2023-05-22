@@ -1,0 +1,59 @@
+@startuml
+!theme vibrant
+actor 管理人员
+participant "报名系统" as B
+database "数据库" as D
+
+管理人员 -> B: 访问报名系统
+activate B
+B -> 管理人员: 显示管理界面
+
+管理人员 -> B: 添加考试信息
+B -> D: 存储考试信息
+activate D
+D --> B: 返回存储结果
+deactivate D
+
+管理人员 -> B: 查看报名信息
+B -> D: 查询报名信息
+activate D
+D --> B: 返回报名信息
+deactivate D
+
+管理人员 -> B: 生成考号
+B -> D: 更新考号信息
+activate D
+D --> B: 返回更新结果
+deactivate D
+
+管理人员 -> B: 管理考点
+B -> D: 查询考点信息
+activate D
+D --> B: 返回考点信息
+deactivate D
+管理人员 -> B: 添加/修改/删除考点信息
+B -> D: 更新考点信息
+activate D
+D --> B: 返回更新结果
+deactivate D
+
+管理人员 -> B: 管理考试成绩
+B -> D: 查询考试成绩
+activate D
+D --> B: 返回考试成绩
+deactivate D
+管理人员 -> B: 添加/修改/删除考试成绩
+B -> D: 更新考试成绩
+activate D
+D --> B: 返回更新结果
+deactivate D
+
+管理人员 -> B: 完善个人信息
+B -> D: 更新个人信息
+activate D
+D --> B: 返回更新结果
+deactivate D
+
+管理人员 -> B: 退出系统
+deactivate B
+@enduml

@@ -1,0 +1,56 @@
+@startuml
+actor 考生
+participant "报名系统" as B
+participant "支付系统" as P
+database "数据库" as D
+
+考生 -> B: 访问报名系统
+activate B
+B -> 考生: 显示报名表单
+考生 -> B: 填写报名表单
+B -> D: 存储报名信息
+activate D
+D --> B: 返回存储结果
+deactivate D
+B -> 考生: 显示支付信息
+考生 -> P: 进行支付
+activate P
+P -> B: 返回支付结果
+deactivate P
+B -> D: 更新支付状态
+activate D
+D --> B: 返回更新结果
+deactivate D
+B -> 考生: 确认支付并提交报名表单
+考生 -> B: 查看报名状态
+B -> D: 查询报名状态
+activate D
+D --> B: 返回报名状态
+deactivate D
+B -> 考生: 返回已报名状态
+考生 -> B: 查看支付状态
+B -> D: 查询支付状态
+activate D
+D --> B: 返回支付状态
+deactivate D
+B -> 考生: 返回已缴费状态
+考生 -> B: 查看考试信息
+B -> D: 查询考试信息
+activate D
+D --> B: 返回考试信息
+deactivate D
+B -> 考生: 返回考试信息
+考生 -> B: 查看考点信息
+B -> D: 查询考点信息
+activate D
+D --> B: 返回考点信息
+deactivate D
+B -> 考生: 返回考点信息
+考生 -> B: 参加考试
+B -> D: 更新考试状态
+activate D
+D --> B: 返回更新结果
+deactivate D
+B -> 考生: 返回已考试状态
+deactivate B
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+!theme vibrant
+actor 考生
+participant "报名系统" as B
+database "数据库" as D
+
+考生 -> B: 访问报名系统
+activate B
+B -> 考生: 显示查询界面
+考生 -> B: 请求查询成绩
+B -> D: 查询成绩
+activate D
+D --> B: 返回成绩信息
+deactivate D
+B -> 考生: 显示成绩信息
+deactivate B
+@enduml
