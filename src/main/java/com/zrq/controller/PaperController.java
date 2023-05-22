@@ -32,5 +32,13 @@ public class PaperController extends BaseController{
         return paperList;
     }
 
+    @RequestMapping("list")
+    public String list(){
+//        PageBean<Exam> examPage=paperService.findByPage(Integer.parseInt(currentPage),pageSize);
+//        System.out.println("pageSize:"+examPage.getTotalNum()+currentPage.toString()+pageSize);
+//        System.out.println("pageSize:"+examPage.getItems().get(1).getName());
+//        map.put("examPage",examPage);
+        return "paper-list";
+    }
 
 }

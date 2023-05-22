@@ -3,6 +3,7 @@ package com.zrq.controller.examinee;
 import com.zrq.controller.BaseController;
 import com.zrq.entity.Exam;
 import com.zrq.entity.MyExam;
+import com.zrq.entity.Paper;
 import com.zrq.entity.User;
 import com.zrq.entity.examinee.Examinee;
 import com.zrq.service.ExamService;
@@ -191,6 +192,17 @@ public class ExamineeController extends BaseController{
             map.put("search",search);
         }
         return "score";
+    }
+
+    @RequestMapping("paperlist")
+    public  String paperlist(HttpServletRequest request,Map<String,Object> map,
+                         @RequestParam(name = "id",required = false) Integer id){
+        System.out.println("userid???");
+        System.out.println(id);
+        User examinee=examineeService.findUserById(id);
+        request.getSession().setAttribute("currentExaminee",examinee);
+        map.put("currentExaminee",examinee);
+        return "e-paperlist";
     }
 
     /**

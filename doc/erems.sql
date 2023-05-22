@@ -220,7 +220,7 @@ DROP TABLE IF EXISTS `fillquestions`;
 /*!40101 SET character_set_client = utf8 */;
 create table `fillquestions`(
 `id` int(3) NOT NULL AUTO_INCREMENT,
-`paper_id` int(5) DEFAULT '00000' COMMENT '试卷id',
+`paperid` int(5) DEFAULT '00000' COMMENT '试卷id',
 `question` varchar(500) NOT NULL COMMENT '题干内容',
 `answer` varchar(500) NOT NULL COMMENT '正确答案',
 PRIMARY KEY (`id`)
@@ -234,3 +234,29 @@ insert into `fillquestions` values
 (3, 1, 'The third fillQuestion here: xxxx xxxx xxxx?', 'This is answer for the third question.');
 insert into `fillquestions` values
 (4, 2, 'The fourth fillQuestion here: xxxx xxxx xxxx?', 'This is answer for the fourth question.');
+
+-- 选择题答卷
+DROP TABLE IF EXISTS `selectanswers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+create table `selectanswers`(
+`id` int(3) NOT NULL AUTO_INCREMENT,
+`studentid` int(11) NOT NULL COMMENT '学生id',
+`paperid` int(5) DEFAULT '00000' COMMENT '试卷id',
+`questionid` int(3) NOT NULL COMMENT '题目id',
+`answer` int(1) NOT NULL COMMENT '作答内容',
+PRIMARY KEY (`id`)
+)ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+-- 填空题答卷
+DROP TABLE IF EXISTS `fillanswers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+create table `fillanswers`(
+`id` int(3) NOT NULL AUTO_INCREMENT,
+`studentid` int(11) NOT NULL COMMENT '学生id',
+`paperid` int(5) DEFAULT '00000' COMMENT '试卷id',
+`questionid` int(3) NOT NULL COMMENT '题目id',
+`answer` varchar(100) NOT NULL COMMENT '作答内容',
+PRIMARY KEY (`id`)
+)ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
