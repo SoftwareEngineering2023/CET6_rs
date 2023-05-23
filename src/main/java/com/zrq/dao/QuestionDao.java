@@ -22,6 +22,12 @@ public interface QuestionDao {
     @Select("select * from fillquestions")
     public List<FillQuestion> findAllFill();
 
+    @Select("select * from selectquestions where paperid=#{paperid}")
+    public List<SelectQuestion> findSelectByPaper(Integer paperid);
+
+    @Select("select * from fillquestions where paperid=#{paperid}")
+    public List<FillQuestion> findFillByPaper(Integer paperid);
+
     /**
      * 根据id更新考试信息
      * @param paper

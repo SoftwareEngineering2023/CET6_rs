@@ -1,12 +1,11 @@
 package com.zrq.controller.examinee;
 
 import com.zrq.controller.BaseController;
-import com.zrq.entity.Exam;
-import com.zrq.entity.MyExam;
-import com.zrq.entity.Paper;
-import com.zrq.entity.User;
+import com.zrq.entity.*;
 import com.zrq.entity.examinee.Examinee;
+import com.zrq.service.AnswerService;
 import com.zrq.service.ExamService;
+import com.zrq.service.PaperService;
 import com.zrq.service.examinee.ExamineeService;
 import com.zrq.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,10 @@ public class ExamineeController extends BaseController{
     private ExamineeService examineeService;
     @Autowired
     private ExamService examService;
-
+    @Autowired
+    private PaperService paperService;
+    @Autowired
+    private AnswerService answerService;
     /**
      * 显示个人列表，无用
      * @param map
@@ -193,16 +195,62 @@ public class ExamineeController extends BaseController{
         }
         return "score";
     }
-
+    //试卷列表
     @RequestMapping("paperlist")
     public  String paperlist(HttpServletRequest request,Map<String,Object> map,
                          @RequestParam(name = "id",required = false) Integer id){
-        System.out.println("userid???");
-        System.out.println(id);
+//        System.out.println("userid???");
+//        System.out.println(id);
         User examinee=examineeService.findUserById(id);
         request.getSession().setAttribute("currentExaminee",examinee);
         map.put("currentExaminee",examinee);
         return "e-paperlist";
+    }
+
+    //开始答卷
+    @RequestMapping("answer")
+    public String paper(HttpServletRequest request,@RequestParam("paperid")Integer paperid, Map<String,Object> map){
+        Paper paper=paperService.findById(paperid);
+        request.getSession().setAttribute("currentAnswerPaper",paper);
+        User examinee=(User)(request.getSession().getAttribute("currentExaminee"));
+//        System.out.println("userid???");
+//        System.out.println(examinee.getId());
+        map.put("currentAnswerPaper",paper);
+        return "answersheet";
+    }
+
+    @RequestMapping("saveSelectAnswer")
+    public String saveSelectQuestion(HttpServletRequest request) {
+//        System.out.println("qlength???");
+//        System.out.println(request.getSession().getAttribute("qlength"));
+//        System.out.println("sqid1???");
+//        System.out.println(request.getParameter("sqid1"));
+//        System.out.println("answer1???");
+//        System.out.println(request.getParameter("answer1"));
+        int qlength = (int)(request.getSession().getAttribute("qlength"));
+
+        Paper paper = (Paper)(request.getSession().getAttribute("currentAnswerPaper"));
+        int paperid = paper.getId();
+        User examinee = (User)(request.getSession().getAttribute("currentExaminee"));
+        int eid = examinee.getId();
+        for(int i=1;i<qlength+1;i++){
+            String answer_name = ("answer"+i);
+            String sqid_name = ("sqid"+i);
+            System.out.println(answer_name);
+            System.out.println(sqid_name);
+            int answer = Integer.parseInt(request.getParameter(answer_name));
+            int sqid = Integer.parseInt(request.getParameter(sqid_name));
+
+            //插入答案
+            SelectAnswer sa = new SelectAnswer();
+            sa.setPaperId(paperid);
+            sa.setStudentId(eid);
+            sa.setQuestionId(sqid);
+            sa.setAnswer(answer);
+
+            answerService.saveSelect(sa);
+        }
+        return "paperlist";
     }
 
     /**

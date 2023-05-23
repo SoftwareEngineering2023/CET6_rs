@@ -196,6 +196,7 @@ public class ManagerController {
         return "select-questiontype";
     }
 
+
     /**
      * 返回任何路径对应页面
      * 如果未定义方法会默认使用该方法

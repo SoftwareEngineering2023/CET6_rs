@@ -1,9 +1,8 @@
 package com.zrq.controller;
 
-import com.zrq.entity.Exam;
-import com.zrq.entity.Paper;
-import com.zrq.entity.Statistics;
+import com.zrq.entity.*;
 import com.zrq.service.PaperService;
+import com.zrq.service.QuestionService;
 import com.zrq.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,12 +23,32 @@ import java.util.Map;
 public class PaperController extends BaseController{
     @Autowired
     private PaperService paperService;
+    @Autowired
+    private QuestionService questionService;
 
     @RequestMapping("paperList")
     @ResponseBody
     public List<Paper> paperList(){
         List<Paper> paperList=paperService.findAll();
         return paperList;
+    }
+
+    @RequestMapping("sqList")
+    @ResponseBody
+    public List<SelectQuestion> sqList(HttpServletRequest request){
+        Paper paper = (Paper)(request.getSession().getAttribute("currentAnswerPaper"));
+        List<SelectQuestion> sqlist = questionService.findSelectByPaper(paper.getId());
+        request.getSession().setAttribute("qlength",sqlist.size());
+        System.out.println("sqlist???");
+        System.out.println(sqlist.size());
+        return sqlist;
+    }
+    @RequestMapping("fqList")
+    @ResponseBody
+    public List<FillQuestion> fqList(HttpServletRequest request){
+        Paper paper = (Paper)(request.getSession().getAttribute("currentAnswerPaper"));
+        List<FillQuestion> fqlist = questionService.findFillByPaper(paper.getId());
+        return fqlist;
     }
 
     @RequestMapping("list")

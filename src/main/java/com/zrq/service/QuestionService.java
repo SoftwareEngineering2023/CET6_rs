@@ -43,6 +43,14 @@ public class QuestionService {
         return questionDao.saveFill(q);
     }
 
+    public List<SelectQuestion> findSelectByPaper(Integer paperid) {
+        return questionDao.findSelectByPaper(paperid);
+    }
+
+    public List<FillQuestion> findFillByPaper(Integer paperid) {
+        return questionDao.findFillByPaper(paperid);
+    }
+
 //    public Paper findById(Integer id){
 //        return paperDao.findById(id);
 //    }
