@@ -8,13 +8,15 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 
 public class FillQuestion {
-    int id;
-    int paperid;
+    private int id;
+    private int paperid;
     private String question;
     private String answer;
 
-    public void setPaper(Integer pid){paperid=pid;}
+
     public FillQuestion() {}
+    public int getId(){return id;}
+    public void setPaper(Integer pid){paperid=pid;}
     public String getQuestion(){return question;}
     public void setQuestion(String question_){question=question_;}
     public String getAnswer(){return answer;}

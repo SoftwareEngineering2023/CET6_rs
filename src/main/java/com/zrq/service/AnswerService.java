@@ -39,17 +39,17 @@ public class AnswerService {
         return answerDao.saveSelect(a);
     }
 
-//    public int saveFill(SelectAnswer a) {
-//        return answerDao.saveFill(a);
-//    }
+    public int saveFill(FillAnswer a) {
+        return answerDao.saveFill(a);
+    }
 
     public List<SelectAnswer> findSelectByUser(Integer userid) {
         return answerDao.findSelectByUser(userid);
     }
 
-//    public List<FillQuestion> findFillByUser(Integer userid) {
-//        return answerDao.findFillByPaper(paperid);
-//    }
+    public List<FillAnswer> findFillByUser(Integer userid) {
+        return answerDao.findFillByUser(userid);
+    }
 
 //    public Paper findById(Integer id){
 //        return paperDao.findById(id);

@@ -19,7 +19,7 @@
             if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         return fmt;
     }
-    function getPaperList() {
+    function getSqList() {
         $.ajax({
             type: "post",
             url: "/erems/paper/sqList",    //url根据自己的项目实际定义
@@ -41,10 +41,10 @@
                         + '<td>' + data[o].question + '</td>'
                         + '<td><input type="hidden" id="sqid'+ count +'" name="sqid'+ count +'" value="'+ data[o].id +'"/></td>'
                         + '<td><div>'
-                        + '<input id="A" name="answer'+ count +'" type="radio" value="0" th:checked="${answer'+ count +'==0}"/><label for="A">A '+data[o].selectA+'</label>'
-                        + '<input id="B" name="answer'+ count +'" type="radio" value="1" th:checked="${answer'+ count +'==1}"/><label for="B">B '+data[o].selectB+'</label>'
-                        + '<input id="C" name="answer'+ count +'" type="radio" value="2" th:checked="${answer'+ count +'==2}"/><label for="C">C '+data[o].selectC+'</label>'
-                        + '<input id="D" name="answer'+ count +'" type="radio" value="3" th:checked="${answer'+ count +'==3}"/><label for="D">D '+data[o].selectD+'</label>'
+                        + '<input id="A" name="sanswer'+ count +'" type="radio" value="0" th:checked="${sanswer'+ count +'==0}"/><label for="A">A '+data[o].selectA+'</label>'
+                        + '<input id="B" name="sanswer'+ count +'" type="radio" value="1" th:checked="${sanswer'+ count +'==1}"/><label for="B">B '+data[o].selectB+'</label>'
+                        + '<input id="C" name="sanswer'+ count +'" type="radio" value="2" th:checked="${sanswer'+ count +'==2}"/><label for="C">C '+data[o].selectC+'</label>'
+                        + '<input id="D" name="sanswer'+ count +'" type="radio" value="3" th:checked="${sanswer'+ count +'==3}"/><label for="D">D '+data[o].selectD+'</label>'
                         + '</div></td>'
                         + '</tr>';
                     count++;
@@ -53,8 +53,37 @@
             }
         });
     }
+    function getFqList() {
+        $.ajax({
+            type: "post",
+            url: "/erems/paper/fqList",    //url根据自己的项目实际定义
+            async: false,
+            dataType: "text",
+            error: function () {
+                alert("系统忙，请稍后再试！");
+                return false;
+            },
+            success: function (text) {
+                var expressAnswersheet = $("#fqList");
+                var str = '';
+                var count = 1;
+                var data = eval("(" + text + ")");
+                expressAnswersheet.empty();
+                for (var o in data) {
+                    str += '<tr>'
+                        + '<td>' + count + '</td>'
+                        + '<td>' + data[o].question + '</td>'
+                        + '<td><input type="hidden" id="fqid'+ count +'" name="fqid'+ count +'" value="'+ data[o].id +'"/></td>'
+                        + '<td><textarea id="fanswer'+ count +'" name="fanswer'+ count +'" class="required" placeholder="请输入你的答案" rows="5" th:text="*{answer'+ count +'}"></textarea></td>'
+                        + '</tr>';
+                    count++;
+                }
+                expressAnswersheet.append(str);
+            }
+        });
+    }
 </script>
-<body onload="getPaperList()">
+<body onload="getSqList();getFqList()">
 <div id="wrapper" class="row">
   <div th:replace="common/header::nav"></div>
   <div id="page-inner">
@@ -78,6 +107,13 @@
 
               <th:block >
                 <tbody id="sqList">
+                <!--<tr>-->
+                <!--<td>1</td>-->
+                <!--<td>2018-5-4</td>-->
+                <!--<td><a href="/erems/examinee/continuePay?id=">继续支付</a></td>-->
+                <!--</tr>-->
+                </tbody>
+                <tbody id="fqList">
                 <!--<tr>-->
                 <!--<td>1</td>-->
                 <!--<td>2018-5-4</td>-->

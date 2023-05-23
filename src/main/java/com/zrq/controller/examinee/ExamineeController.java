@@ -222,23 +222,26 @@ public class ExamineeController extends BaseController{
     @RequestMapping("saveSelectAnswer")
     public String saveSelectQuestion(HttpServletRequest request) {
 //        System.out.println("qlength???");
-//        System.out.println(request.getSession().getAttribute("qlength"));
-//        System.out.println("sqid1???");
-//        System.out.println(request.getParameter("sqid1"));
-//        System.out.println("answer1???");
-//        System.out.println(request.getParameter("answer1"));
-        int qlength = (int)(request.getSession().getAttribute("qlength"));
+//        System.out.println(request.getSession().getAttribute("sqlength"));
+//        System.out.println("fqid1???");
+//        System.out.println(request.getParameter("fqid1"));
+//        System.out.println("fanswer1???");
+//        System.out.println(request.getParameter("fanswer1"));
 
         Paper paper = (Paper)(request.getSession().getAttribute("currentAnswerPaper"));
         int paperid = paper.getId();
         User examinee = (User)(request.getSession().getAttribute("currentExaminee"));
         int eid = examinee.getId();
-        for(int i=1;i<qlength+1;i++){
-            String answer_name = ("answer"+i);
+
+        //处理选择题
+        int sqlength = (int)(request.getSession().getAttribute("sqlength"));
+
+        for(int i=1;i<sqlength+1;i++){
+            String sanswer_name = ("sanswer"+i);
             String sqid_name = ("sqid"+i);
-            System.out.println(answer_name);
+            System.out.println(sanswer_name);
             System.out.println(sqid_name);
-            int answer = Integer.parseInt(request.getParameter(answer_name));
+            int sanswer = Integer.parseInt(request.getParameter(sanswer_name));
             int sqid = Integer.parseInt(request.getParameter(sqid_name));
 
             //插入答案
@@ -246,9 +249,29 @@ public class ExamineeController extends BaseController{
             sa.setPaperId(paperid);
             sa.setStudentId(eid);
             sa.setQuestionId(sqid);
-            sa.setAnswer(answer);
+            sa.setAnswer(sanswer);
 
             answerService.saveSelect(sa);
+        }
+        //处理填空题
+        int fqlength = (int)(request.getSession().getAttribute("fqlength"));
+
+        for(int i=1;i<fqlength+1;i++){
+            String fanswer_name = ("fanswer"+i);
+            String fqid_name = ("fqid"+i);
+//            System.out.println(fanswer_name);
+//            System.out.println(fqid_name);
+            String fanswer = request.getParameter(fanswer_name);
+            int fqid = Integer.parseInt(request.getParameter(fqid_name));
+
+            //插入答案
+            FillAnswer fa = new FillAnswer();
+            fa.setPaperId(paperid);
+            fa.setStudentId(eid);
+            fa.setQuestionId(fqid);
+            fa.setAnswer(fanswer);
+
+            answerService.saveFill(fa);
         }
         return "paperlist";
     }

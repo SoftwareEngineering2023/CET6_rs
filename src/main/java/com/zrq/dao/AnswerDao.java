@@ -21,8 +21,8 @@ public interface AnswerDao {
     @Select("select * from selectanswers where studentid=#{userid}")
     public List<SelectAnswer> findSelectByUser(Integer userid);
 
-    @Select("select * from fillquestions where paperid=#{paperid}")
-    public List<FillAnswer> findFillByUser(Integer paperid);
+    @Select("select * from fillanswers where studentid=#{userid}")
+    public List<FillAnswer> findFillByUser(Integer userid);
 
     /**
      * 根据id更新考试信息
@@ -34,16 +34,16 @@ public interface AnswerDao {
 
     /**
      * 新增考试信息
-     * @param question
+     * @param answer
      * @return
      */
     @Insert("insert selectanswers(paperid, studentid,  questionid, answer) values(#{paperid}, #{studentid}, #{questionid},#{answer})")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
     public int saveSelect(SelectAnswer selectanswers);
 
-//    @Insert("insert fillquestions(paperid, question, answer) values(#{paperid}, #{question},#{answer})")
-//    @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
-//    public int saveFill(FillQuestion fillquestions);
+    @Insert("insert fillanswers(paperid, studentid,  questionid, answer) values(#{paperid}, #{studentid}, #{questionid},#{answer})")
+    @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
+    public int saveFill(FillAnswer fillanswers);
 
 //    @Select("select * from paper where id=#{id}")
 //    public Paper findById(Integer id);

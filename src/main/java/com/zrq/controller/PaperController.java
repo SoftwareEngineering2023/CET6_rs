@@ -38,7 +38,7 @@ public class PaperController extends BaseController{
     public List<SelectQuestion> sqList(HttpServletRequest request){
         Paper paper = (Paper)(request.getSession().getAttribute("currentAnswerPaper"));
         List<SelectQuestion> sqlist = questionService.findSelectByPaper(paper.getId());
-        request.getSession().setAttribute("qlength",sqlist.size());
+        request.getSession().setAttribute("sqlength",sqlist.size());
         System.out.println("sqlist???");
         System.out.println(sqlist.size());
         return sqlist;
@@ -48,6 +48,9 @@ public class PaperController extends BaseController{
     public List<FillQuestion> fqList(HttpServletRequest request){
         Paper paper = (Paper)(request.getSession().getAttribute("currentAnswerPaper"));
         List<FillQuestion> fqlist = questionService.findFillByPaper(paper.getId());
+        request.getSession().setAttribute("fqlength",fqlist.size());
+        System.out.println("fqlist???");
+        System.out.println(fqlist.size());
         return fqlist;
     }
 
