@@ -17,6 +17,9 @@ public interface PaperDao {
     @Select("select * from paper")
     public List<Paper> findAll();
 
+    @Select("select * from paper, mypaper where paper.id=mypaper.paperid and userid = #{userid}")
+    public List<Paper> findAllmy(Integer userid);
+
     /**
      * 根据id更新考试信息
      * @param paper
@@ -36,4 +39,5 @@ public interface PaperDao {
 
     @Select("select * from paper where id=#{id}")
     public Paper findById(Integer id);
+
 }

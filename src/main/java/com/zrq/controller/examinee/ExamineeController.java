@@ -75,6 +75,14 @@ public class ExamineeController extends BaseController{
             return "paypage";
         return "my-info";
     }
+    @RequestMapping("joinPaper")
+    public  String joinPaper(HttpServletRequest request){
+        Integer paperid=((Paper)request.getSession().getAttribute("currentPaper")).getId();
+        Integer userid=((User)request.getSession().getAttribute("user")).getId();
+        if(examineeService.insertMyPaper(userid,paperid)>0)
+            return "paypage";
+        return "my-info";
+    }
 
     /**
      * 跳转到更新个人信息页面
@@ -107,20 +115,35 @@ public class ExamineeController extends BaseController{
      * @param map
      * @return
      */
+//    @RequestMapping("pay")
+//    public  String pay(HttpServletRequest request,Map<String,Object> map){
+//        Exam exam=(Exam)request.getSession().getAttribute("currentExam");
+//        Integer userId=((User)request.getSession().getAttribute("user")).getId();
+//        if(exam!=null) {//当前考试存在则跳转相关信息，不存在则返回考试列表页面
+//            MyExam myExam=examineeService.payByUserAndExam(userId,exam.getId());
+//            List<MyExam> l=new ArrayList<MyExam>();
+//            l.add(myExam);
+//            map.put("myExam",l);
+////            System.out.println("pay-myexam:"+l.get(0).getPay());
+//            request.getSession().removeAttribute("currentExam");
+//            return "my-exam";
+//        }
+//        return "my-exam";
+//    }
     @RequestMapping("pay")
     public  String pay(HttpServletRequest request,Map<String,Object> map){
-        Exam exam=(Exam)request.getSession().getAttribute("currentExam");
+        Paper paper=(Paper)request.getSession().getAttribute("currentPaper");
         Integer userId=((User)request.getSession().getAttribute("user")).getId();
-        if(exam!=null) {//当前考试存在则跳转相关信息，不存在则返回考试列表页面
-            MyExam myExam=examineeService.payByUserAndExam(userId,exam.getId());
-            List<MyExam> l=new ArrayList<MyExam>();
-            l.add(myExam);
-            map.put("myExam",l);
-//            System.out.println("pay-myexam:"+l.get(0).getPay());
-            request.getSession().removeAttribute("currentExam");
-            return "my-exam";
+        if(paper!=null) {//当前考试存在则跳转相关信息，不存在则返回考试列表页面
+            MyPaper myPaper=examineeService.payByUserAndPaper(userId,paper.getId());
+            List<MyPaper> l=new ArrayList<MyPaper>();
+            l.add(myPaper);
+            map.put("myPaper",l);
+            System.out.println("pay-mypaper:"+l.get(0).getPay());
+            request.getSession().removeAttribute("currentPaper");
+            return "my-paper";
         }
-        return "my-exam";
+        return "my-paper";
     }
 
     /**
@@ -229,6 +252,7 @@ public class ExamineeController extends BaseController{
 //        System.out.println(request.getParameter("fanswer1"));
 
         Paper paper = (Paper)(request.getSession().getAttribute("currentAnswerPaper"));
+//        paper.setOuted();//paper对该学生置为失效
         int paperid = paper.getId();
         User examinee = (User)(request.getSession().getAttribute("currentExaminee"));
         int eid = examinee.getId();

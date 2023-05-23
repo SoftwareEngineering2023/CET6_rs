@@ -33,6 +33,16 @@ public class PaperController extends BaseController{
         return paperList;
     }
 
+    @RequestMapping("mypaperList")
+    @ResponseBody
+    public List<Paper> mypaperList(HttpServletRequest request){
+        System.out.println("mypaperList???");
+        User user = (User)(request.getSession().getAttribute("user"));
+        System.out.println(user.getId());
+        List<Paper> paperList=paperService.findAllmy(user.getId());
+        return paperList;
+    }
+
     @RequestMapping("sqList")
     @ResponseBody
     public List<SelectQuestion> sqList(HttpServletRequest request){
@@ -61,6 +71,16 @@ public class PaperController extends BaseController{
 //        System.out.println("pageSize:"+examPage.getItems().get(1).getName());
 //        map.put("examPage",examPage);
         return "paper-list";
+    }
+
+    @RequestMapping("signup")
+    public String signup(HttpServletRequest request,@RequestParam("id") Integer id,
+                         Map<String,Object> map){
+        System.out.println("xxx"+id);
+        Paper currentPaper=paperService.findById(id);
+        request.getSession().setAttribute("currentPaper",currentPaper);
+        map.put("currentPaper",currentPaper);
+        return "signup";
     }
 
 }

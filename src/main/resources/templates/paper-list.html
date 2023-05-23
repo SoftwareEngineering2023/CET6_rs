@@ -22,7 +22,7 @@
     function getPaperList() {
         $.ajax({
             type: "post",
-            url: "/erems/paper/mypaperList",    //url根据自己的项目实际定义
+            url: "/erems/paper/paperList",    //url根据自己的项目实际定义
             async: false,
             dataType: "text",
             error: function () {
@@ -41,7 +41,7 @@
                         + '<td>' + data[o].name + '</td>'
                         + '<td>' + data[o].user_name + '</td>'
                         + '<td>' +new Date(data[o].time).Format("yyyy-MM-dd hh:mm:ss")  + '</td>'
-                        + '<td><a href="/erems/examinee/answer?paperid=' + data[o].id + '" class="btn btn-primary">开始答卷</a>'
+                        + '<td><a href="/erems/paper/signup?id=' + data[o].id + '" class="btn btn-primary">报名</a>'
                         + '</tr>';
                     count++;
                 }

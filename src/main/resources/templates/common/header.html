@@ -82,6 +82,7 @@
                 <!--role:0管理员，1老师，2考生-->
                 <!--考生个人导航条-->
                 <th:block th:if="${session.user.role}==2">
+<!--                    hyx关掉社会考试信息导航-->
                 <li>
                     <a href="#"><i class="fa fa-desktop "></i>社会考试信息<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -93,6 +94,18 @@
                         <!--</li>-->
                     </ul>
                 </li>
+                <li>
+                    <a href="#"><i class="fa fa-desktop "></i>考试报名<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/erems/paper/list"><i class="fa fa-toggle-on"></i>考试列表</a>
+                        </li>
+                        <!--<li>-->
+                        <!--<a onclick="change('admin/notification')"><i class="fa fa-bell "></i>Notifications</a>-->
+                        <!--</li>-->
+                    </ul>
+                </li>
+
                 <!--<li>-->
                     <!--<a href="exam/signup"><i class="fa fa-anchor "></i>考试报名</a>-->
                 <!--</li>-->

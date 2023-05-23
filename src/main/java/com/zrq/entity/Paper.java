@@ -18,15 +18,18 @@ public class Paper {
 
     private String user_name;//出卷人
 
+    private int outed=0;
+
 
     public Paper() {}
     public Integer getId(){return id;}
     public void setId(Integer id_){id=id_;}
     public String getName(){return name;}
     public void setName(String name_){name=name_;}
-    public String getUser(){return user_name;}
+    public String getUser_name(){return user_name;}
     public void setUser(String user_name_){user_name=user_name_;}
     public Date getTime(){return time;}
     public void setTime(Date time_){time=time_;}
-
+    public int getOuted(){return outed;}
+    public void setOuted(){outed=1;}
 }

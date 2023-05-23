@@ -20,6 +20,11 @@ public class PaperService {
         return paperDao.findAll();
     }
 
+    public List<Paper> findAllmy(Integer userid){
+//        System.out.println("findAll");
+        return paperDao.findAllmy(userid);
+    }
+
     /**
      * 根据id更新考试信息
      * @param paper

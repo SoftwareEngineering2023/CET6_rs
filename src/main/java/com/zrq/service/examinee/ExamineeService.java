@@ -3,6 +3,7 @@ package com.zrq.service.examinee;
 import com.zrq.dao.ExamDao;
 import com.zrq.dao.examinee.ExamineeDao;
 import com.zrq.entity.MyExam;
+import com.zrq.entity.MyPaper;
 import com.zrq.entity.User;
 import com.zrq.entity.examinee.Examinee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,13 +52,30 @@ public class ExamineeService {
      * @param examId
      * @return
      */
-    public MyExam payByUserAndExam(Integer userId, Integer examId) {
-        MyExam myExam=examineeDao.findByUserAndExam(userId, examId);
-        examineeDao.updateMyExamPay(myExam);
+//    public MyExam payByUserAndExam(Integer userId, Integer examId) {
+//        MyExam myExam=examineeDao.findByUserAndExam(userId, examId);
+//        examineeDao.updateMyExamPay(myExam);
+//        //由上一步更新代表已成功修改支付状态
+//        // 但是由于先查询了原先未修改状态时的数据，故自我更新
+//        myExam.setPay(1);
+//        return myExam;
+//    }
+    public int insertMyPaper(Integer userid, Integer paperid) {
+//        MyExam myExam=examineeDao.findByUserAndExam(userid, paperid);
+        int result = examineeDao.insertMyPaper(userid, paperid);
         //由上一步更新代表已成功修改支付状态
         // 但是由于先查询了原先未修改状态时的数据，故自我更新
-        myExam.setPay(1);
-        return myExam;
+//        myExam.setPay(1);
+        return result;
+    }
+
+    public MyPaper payByUserAndPaper(Integer userid, Integer paperid) {
+        MyPaper myPaper=examineeDao.findByUserAndPaper(userid, paperid);
+        examineeDao.updateMyPaperPay(myPaper);
+        //由上一步更新代表已成功修改支付状态
+        // 但是由于先查询了原先未修改状态时的数据，故自我更新
+        myPaper.setPay(1);
+        return myPaper;
     }
 
     /**

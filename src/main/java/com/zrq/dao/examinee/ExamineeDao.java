@@ -1,6 +1,7 @@
 package com.zrq.dao.examinee;
 
 import com.zrq.entity.MyExam;
+import com.zrq.entity.MyPaper;
 import com.zrq.entity.User;
 import com.zrq.entity.examinee.Examinee;
 import org.apache.ibatis.annotations.*;
@@ -55,6 +56,21 @@ public interface ExamineeDao{
     })
     public MyExam findByUserAndExam(@Param("userId") Integer userId, @Param("examId") Integer examId);
 
+    @Select("select * from mypaper where userid=#{userid} and paperid=#{paperid}")
+//    @Results(id="user_paper",value ={
+//            @Result(property="userid",
+//                    column = "userid"
+////                    one = @One(select = "com.zrq.dao.examinee.ExamineeDao.findById")
+//            ),
+//            @Result(property="paperid",
+//                    column = "paperid"
+////                    one = @One(select = "com.zrq.dao.PaperDao.findById")
+//            ),
+////            @Result(property="examNum",column = "exam_num"),
+////            @Result(property="roomNum",column = "room_num")
+//    })
+    public MyPaper findByUserAndPaper(@Param("userid") Integer userid, @Param("paperid") Integer paperid);
+
     /**
      * 根据支付状态判断是否支付：0未支付，1支付
      * @param userId
@@ -98,6 +114,11 @@ public interface ExamineeDao{
      */
     @Update("update myexam set pay=1 where id=#{id}")
     public void updateMyExamPay(MyExam myExam);
+    @Update("update mypaper set pay=1 where id=#{id}")
+    public void updateMyPaperPay(MyPaper myPaper);
+
+    @Insert("insert mypaper(userid,paperid) values(#{userid},#{paperid})")//edited_by_hyx
+    public Integer insertMyPaper(Integer userid, Integer paperid);
 
     /**
      * 更新用户信息

@@ -181,13 +181,28 @@ create table `paper`(
 `name` varchar(20) NOT NULL DEFAULT '试卷' COMMENT '试卷名称',
 `time` datetime DEFAULT NULL COMMENT '发布时间',
 `user_name` varchar(10) NOT NULL DEFAULT '出卷人' COMMENT '出卷人姓名',
+`outed` int(1) NOT NULL DEFAULT 0,
 PRIMARY KEY (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
-INSERT INTO `paper` VALUES('00001', '2020年全国大学生英语六级考试', '2020-06-20 09:00:00', '张三');
-INSERT INTO `paper` VALUES('00002', '2021年全国大学生英语六级考试', '2021-06-20 09:00:00', '李四');
-INSERT INTO `paper` VALUES('00003', '2022年全国大学生英语六级考试', '2022-06-20 09:00:00', '王五');
+INSERT INTO `paper` VALUES('00001', '2020年全国大学生英语六级考试', '2020-06-20 09:00:00', '张三', 0);
+INSERT INTO `paper` VALUES('00002', '2021年全国大学生英语六级考试', '2021-06-20 09:00:00', '李四', 0);
+INSERT INTO `paper` VALUES('00003', '2022年全国大学生英语六级考试', '2022-06-20 09:00:00', '王五', 0);
+
+DROP TABLE IF EXISTS `mypaper`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+create table `mypaper`(
+`id` int(5) NOT NULL AUTO_INCREMENT,
+`paperid` int(5) NOT NULL COMMENT '试卷id',
+`userid` int(11) NOT NULL COMMENT '学生id',
+`score` int(3) DEFAULT NULL COMMENT '分数',
+`pay` int(1) NOT NULL DEFAULT 0,
+PRIMARY KEY (`id`)
+)ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
 
 -- 选择题
 DROP TABLE IF EXISTS `selectquestions`;
