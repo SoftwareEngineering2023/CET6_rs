@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -194,30 +195,43 @@ public class ExamineeController extends BaseController{
      * @param map
      * @return
      */
+//    @RequestMapping("score")
+//    public  String score(HttpServletRequest request,Map<String,Object> map,
+//                         @RequestParam(name = "id",required = false) Integer id){
+//        Integer userId=((User)request.getSession().getAttribute("user")).getId();
+//        List<MyExam> myExam=null;
+//        if(id!=null){
+//            //考试id存在查询单条考试所有记录
+//            if(id==0){//id=0查询所有
+//                myExam=examineeService.findByUserAndExamed(userId);
+//            }else {
+//                myExam = examineeService.findOneByUserAndExamed(userId, id);
+//            }
+//            map.put("myExam",myExam);//用传递的参数不同控制页面是否显示搜索框
+//        }else{
+//            //考试id存在查询所有考试记录
+//            myExam=examineeService.findByUserAndExamed(userId);
+//            Map<Integer,String> search=new TreeMap<Integer,String>();
+//            for (MyExam e:myExam){
+//                search.put(e.getExam().getId(),e.getExam().getName());
+//            }
+//            map.put("search",search);
+//        }
+//        return "score";
+//    }
     @RequestMapping("score")
     public  String score(HttpServletRequest request,Map<String,Object> map,
                          @RequestParam(name = "id",required = false) Integer id){
-        Integer userId=((User)request.getSession().getAttribute("user")).getId();
-        List<MyExam> myExam=null;
-        if(id!=null){
-            //考试id存在查询单条考试所有记录
-            if(id==0){//id=0查询所有
-                myExam=examineeService.findByUserAndExamed(userId);
-            }else {
-                myExam = examineeService.findOneByUserAndExamed(userId, id);
-            }
-            map.put("myExam",myExam);//用传递的参数不同控制页面是否显示搜索框
-        }else{
-            //考试id存在查询所有考试记录
-            myExam=examineeService.findByUserAndExamed(userId);
-            Map<Integer,String> search=new TreeMap<Integer,String>();
-            for (MyExam e:myExam){
-                search.put(e.getExam().getId(),e.getExam().getName());
-            }
-            map.put("search",search);
-        }
-        return "score";
+        return "score-record";
     }
+    @RequestMapping("getScoreRecord")
+    @ResponseBody
+    public List<MyPaper> getScoreRecord(HttpServletRequest request){
+        Integer userId=((User)request.getSession().getAttribute("user")).getId();
+        List<MyPaper> mypaperList=paperService.findAllMyScored(userId);
+        return mypaperList;
+    }
+
     //试卷列表
     @RequestMapping("paperlist")
     public  String paperlist(HttpServletRequest request,Map<String,Object> map,
@@ -239,11 +253,15 @@ public class ExamineeController extends BaseController{
 //        System.out.println("userid???");
 //        System.out.println(examinee.getId());
         map.put("currentAnswerPaper",paper);
+
+        //mypaper置为失效
+        examineeService.outedByUserAndPaper(examinee.getId(), paper.getId());
+
         return "answersheet";
     }
 
     @RequestMapping("saveSelectAnswer")
-    public String saveSelectQuestion(HttpServletRequest request) {
+    public String saveSelectAnswer(HttpServletRequest request) {
 //        System.out.println("qlength???");
 //        System.out.println(request.getSession().getAttribute("sqlength"));
 //        System.out.println("fqid1???");
@@ -297,7 +315,7 @@ public class ExamineeController extends BaseController{
 
             answerService.saveFill(fa);
         }
-        return "paperlist";
+        return "my-paper";
     }
 
     /**

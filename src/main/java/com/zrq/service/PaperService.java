@@ -1,11 +1,7 @@
 package com.zrq.service;
 
-import com.github.pagehelper.PageHelper;
 import com.zrq.dao.PaperDao;
-import com.zrq.entity.Exam;
-import com.zrq.entity.Paper;
-import com.zrq.entity.Statistics;
-import com.zrq.util.PageBean;
+import com.zrq.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +16,18 @@ public class PaperService {
         return paperDao.findAll();
     }
 
+    public List<MyPaper> findAllMyScored(Integer userid){
+//        System.out.println("findAll");
+        return paperDao.findAllMyScored(userid);
+    }
+
     public List<Paper> findAllmy(Integer userid){
 //        System.out.println("findAll");
         return paperDao.findAllmy(userid);
+    }
+
+    public List<User> findAllStudentByPaper(Integer paperid){
+        return paperDao.findAllStudentByPaper(paperid);
     }
 
     /**

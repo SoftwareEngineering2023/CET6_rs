@@ -1,13 +1,10 @@
 package com.zrq.controller.manager;
 
-import com.zrq.entity.Exam;
-import com.zrq.entity.User;
-import com.zrq.entity.Paper;
-import com.zrq.entity.SelectQuestion;
-import com.zrq.entity.FillQuestion;
+import com.zrq.entity.*;
 import com.zrq.entity.examinee.Examinee;
 import com.zrq.service.PaperService;
 import com.zrq.service.QuestionService;
+import com.zrq.service.examinee.ExamineeService;
 import com.zrq.service.manager.ManagerService;
 import com.zrq.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -32,6 +30,8 @@ public class ManagerController {
     private ManagerService managerService;
     @Autowired
     private PaperService paperService;
+    @Autowired
+    private ExamineeService examineeService;
     @Autowired
     private QuestionService questionService;
 
@@ -194,6 +194,97 @@ public class ManagerController {
         questionService.saveFill(fillQuestion);
 
         return "select-questiontype";
+    }
+
+    //给试卷打分
+    @RequestMapping("gradepaper")
+    public String gradepaper(HttpServletRequest request, @RequestParam(name = "id", required = false)Integer paperid){
+        if(paperid!=null) {
+            Paper paper = paperService.findById(paperid);
+            request.getSession().setAttribute("gradePaper", paper);
+        }
+        return "grade-student";
+    }
+
+    @RequestMapping("gradeStudent")
+    @ResponseBody
+    public List<User> paperList(HttpServletRequest request){
+        Paper paper = (Paper)(request.getSession().getAttribute("gradePaper"));
+        List<User> userList=paperService.findAllStudentByPaper(paper.getId());
+        return userList;
+    }
+    @RequestMapping("answerResult")
+    public String answerResult(HttpServletRequest request, @RequestParam(name = "id")Integer userid){
+        User user = examineeService.findUserById(userid);
+        System.out.println("answerResult???");
+        System.out.println(user.getId());
+        request.getSession().setAttribute("gradeUser", user);
+        return "grade-answerResult";
+    }
+
+    @RequestMapping("saveScore")
+    public String saveScore(HttpServletRequest request) {
+//        System.out.println("qlength???");
+//        System.out.println(request.getSession().getAttribute("sqlength"));
+//        System.out.println("fqid1???");
+//        System.out.println(request.getParameter("fqid1"));
+//        System.out.println("fanswer1???");
+//        System.out.println(request.getParameter("fanswer1"));
+
+        Paper paper = (Paper)(request.getSession().getAttribute("gradePaper"));
+//        paper.setOuted();//paper对该学生置为失效
+        int paperid = paper.getId();
+//        System.out.println("paperid???"+paperid);
+        User examinee = (User)(request.getSession().getAttribute("gradeUser"));
+        int eid = examinee.getId();
+//        System.out.println("eid???"+eid);
+
+        //处理选择题
+        float total_score = (float)(request.getSession().getAttribute("selectScore"));
+//        System.out.println("selectScore???"+total_score);
+//        int sqlength = (int)(request.getSession().getAttribute("sqlength"));
+//
+//        for(int i=1;i<sqlength+1;i++){
+//            String sanswer_name = ("sanswer"+i);
+//            String sqid_name = ("sqid"+i);
+//            System.out.println(sanswer_name);
+//            System.out.println(sqid_name);
+//            int sanswer = Integer.parseInt(request.getParameter(sanswer_name));
+//            int sqid = Integer.parseInt(request.getParameter(sqid_name));
+//
+//            //插入答案
+//            SelectAnswer sa = new SelectAnswer();
+//            sa.setPaperId(paperid);
+//            sa.setStudentId(eid);
+//            sa.setQuestionId(sqid);
+//            sa.setAnswer(sanswer);
+//
+//            answerService.saveSelect(sa);
+//        }
+        //处理填空题
+        int falength = (int)(request.getSession().getAttribute("falength"));
+
+        for(int i=1;i<falength+1;i++){
+            String fscore_name = ("fscore"+i);
+            String faid_name = ("faid"+i);
+//            System.out.println(fanswer_name);
+//            System.out.println(fqid_name);
+            Integer fscore = Integer.parseInt(request.getParameter(fscore_name));
+            int fqid = Integer.parseInt(request.getParameter(faid_name));
+
+            total_score+=fscore;
+
+            //插入答案
+//            FillAnswer fa = new FillAnswer();
+//            fa.setPaperId(paperid);
+//            fa.setStudentId(eid);
+//            fa.setQuestionId(fqid);
+//            fa.setAnswer(fanswer);
+//
+//            answerService.saveFill(fa);
+        }
+        examineeService.setScore(examinee.getId(),paper.getId(), (int)total_score);
+        return "grade-paper";
     }
 
 

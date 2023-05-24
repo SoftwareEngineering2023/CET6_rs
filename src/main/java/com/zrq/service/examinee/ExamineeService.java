@@ -78,6 +78,24 @@ public class ExamineeService {
         return myPaper;
     }
 
+    public void outedByUserAndPaper(Integer userid, Integer paperid) {
+//        MyPaper myPaper=examineeDao.findByUserAndPaper(userid, paperid);
+//        examineeDao.updateMyPaperPay(myPaper);
+        //由上一步更新代表已成功修改支付状态
+        // 但是由于先查询了原先未修改状态时的数据，故自我更新
+        examineeDao.setOuted(userid, paperid);
+//        return myPaper;
+    }
+
+    public void setScore(Integer userid, Integer paperid, Integer score) {
+//        MyPaper myPaper=examineeDao.findByUserAndPaper(userid, paperid);
+//        examineeDao.updateMyPaperPay(myPaper);
+        //由上一步更新代表已成功修改支付状态
+        // 但是由于先查询了原先未修改状态时的数据，故自我更新
+        examineeDao.setScore(userid, paperid, score);
+//        return myPaper;
+    }
+
     /**
      * 根据用户查询已考试信息
      * @param userId
@@ -86,6 +104,7 @@ public class ExamineeService {
     public List<MyExam> findByUserAndExamed(Integer userId) {
         return examineeDao.findByUserAndExamed(userId);
     }
+
 
     /**
      *查询单项考试个人成绩

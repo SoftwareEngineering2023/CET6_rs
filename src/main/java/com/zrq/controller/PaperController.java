@@ -1,6 +1,7 @@
 package com.zrq.controller;
 
 import com.zrq.entity.*;
+import com.zrq.service.AnswerService;
 import com.zrq.service.PaperService;
 import com.zrq.service.QuestionService;
 import com.zrq.util.PageBean;
@@ -25,6 +26,9 @@ public class PaperController extends BaseController{
     private PaperService paperService;
     @Autowired
     private QuestionService questionService;
+
+    @Autowired
+    private AnswerService answerService;
 
     @RequestMapping("paperList")
     @ResponseBody
@@ -62,6 +66,45 @@ public class PaperController extends BaseController{
         System.out.println("fqlist???");
         System.out.println(fqlist.size());
         return fqlist;
+    }
+
+    @RequestMapping("saList")
+    @ResponseBody
+    public float saList(HttpServletRequest request){
+        //实现选择题数据库自动判分
+//        System.out.println("saList???");
+        Paper paper = (Paper)(request.getSession().getAttribute("gradePaper"));
+        User user = (User)(request.getSession().getAttribute("gradeUser"));
+//        System.out.println(paper.getId());
+//        System.out.println(user.getId());
+        List<SelectAnswer> salist = answerService.findSelectByUserAndPaper(user.getId(), paper.getId());
+//        request.getSession().setAttribute("salength",salist.size());
+
+        List<SelectAnswer> saCorrectlist = answerService.findCorrectSelectByUserAndPaper(user.getId(), paper.getId());
+//        request.getSession().setAttribute("salength",salist.size());
+//        System.out.println(user.getId());
+//        System.out.println(paper.getId());
+        System.out.println(saCorrectlist.size());
+        System.out.println(salist.size());
+        float score = (float)saCorrectlist.size()/(float)salist.size()*(float)40;
+        System.out.println(score);
+        request.getSession().setAttribute("selectScore",score);
+
+        System.out.println("sqlist???");
+//        System.out.println(sqlist.size());
+        return score;
+    }
+    @RequestMapping("faList")
+    @ResponseBody
+    public List<FillAnswer> faList(HttpServletRequest request){
+        System.out.println("faList???");
+        Paper paper = (Paper)(request.getSession().getAttribute("gradePaper"));
+        User user = (User)(request.getSession().getAttribute("gradeUser"));
+        List<FillAnswer> falist = answerService.findFillByUserAndPaper(user.getId(), paper.getId());
+        request.getSession().setAttribute("falength",falist.size());
+//        System.out.println("sqlist???");
+//        System.out.println(sqlist.size());
+        return falist;
     }
 
     @RequestMapping("list")

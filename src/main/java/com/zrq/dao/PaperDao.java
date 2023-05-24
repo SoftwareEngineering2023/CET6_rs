@@ -1,8 +1,6 @@
 package com.zrq.dao;
 
-import com.zrq.entity.Exam;
-import com.zrq.entity.Paper;
-import com.zrq.entity.Statistics;
+import com.zrq.entity.*;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -17,8 +15,11 @@ public interface PaperDao {
     @Select("select * from paper")
     public List<Paper> findAll();
 
-    @Select("select * from paper, mypaper where paper.id=mypaper.paperid and userid = #{userid}")
+    @Select("select * from paper, mypaper where paper.id=mypaper.paperid and userid = #{userid} and mypaper.outed=0")
     public List<Paper> findAllmy(Integer userid);
+
+    @Select("select * from paper, mypaper where paper.id=mypaper.paperid and userid = #{userid} and mypaper.outed=1 and score is not NULL")
+    public List<MyPaper> findAllMyScored(Integer userid);
 
     /**
      * 根据id更新考试信息
@@ -39,5 +40,11 @@ public interface PaperDao {
 
     @Select("select * from paper where id=#{id}")
     public Paper findById(Integer id);
+
+    @Select("select * from user,mypaper where mypaper.userid=user.id and mypaper.paperid=#{paperid} and score is NULL")
+    public List<User> findAllStudentByPaper(Integer paperid);
+
+//    @Update("update mypaper set score=#{score} where userid=#{userid} and paperid=#{paperid} and questionid=#{questionid}")
+//    public void setFillScore(Integer userid, Integer paperid, Integer questionid, Integer score);
 
 }

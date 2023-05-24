@@ -199,6 +199,7 @@ create table `mypaper`(
 `userid` int(11) NOT NULL COMMENT '学生id',
 `score` int(3) DEFAULT NULL COMMENT '分数',
 `pay` int(1) NOT NULL DEFAULT 0,
+`outed` int(1) NOT NULL DEFAULT 0,
 PRIMARY KEY (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

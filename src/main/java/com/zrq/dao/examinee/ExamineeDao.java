@@ -57,20 +57,13 @@ public interface ExamineeDao{
     public MyExam findByUserAndExam(@Param("userId") Integer userId, @Param("examId") Integer examId);
 
     @Select("select * from mypaper where userid=#{userid} and paperid=#{paperid}")
-//    @Results(id="user_paper",value ={
-//            @Result(property="userid",
-//                    column = "userid"
-////                    one = @One(select = "com.zrq.dao.examinee.ExamineeDao.findById")
-//            ),
-//            @Result(property="paperid",
-//                    column = "paperid"
-////                    one = @One(select = "com.zrq.dao.PaperDao.findById")
-//            ),
-////            @Result(property="examNum",column = "exam_num"),
-////            @Result(property="roomNum",column = "room_num")
-//    })
     public MyPaper findByUserAndPaper(@Param("userid") Integer userid, @Param("paperid") Integer paperid);
 
+    @Update("update mypaper set outed=1 where userid=#{userid} and paperid=#{paperid}")
+    public void setOuted(Integer userid, Integer paperid);
+
+    @Update("update mypaper set score=#{score} where userid=#{userid} and paperid=#{paperid}")
+    public void setScore(Integer userid, Integer paperid, Integer score);
     /**
      * 根据支付状态判断是否支付：0未支付，1支付
      * @param userId

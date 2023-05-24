@@ -14,7 +14,9 @@ public class MyPaper {
 //    private String examNum;
 //    private String roomNum;
 //    private Address address;
-    private Integer pay;
+    private Integer pay = 0;
+
+    private Integer outed = 0;
 
     public MyPaper() {
     }
@@ -35,11 +37,11 @@ public class MyPaper {
         this.userid = user;
     }
 
-    public Integer getPaper() {
+    public Integer getPaperid() {
         return paperid;
     }
 
-    public void setPaper(Integer pid) {
+    public void setPaperid(Integer pid) {
         this.paperid = pid;
     }
 
@@ -89,5 +91,13 @@ public class MyPaper {
 
     public void setPay(Integer pay) {
         this.pay = pay;
+    }
+
+    public Integer getOuted() {
+        return outed;
+    }
+
+    public void setOuted(Integer outed) {
+        this.outed = outed;
     }
 }

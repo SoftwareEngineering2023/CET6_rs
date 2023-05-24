@@ -18,11 +18,14 @@ public interface AnswerDao {
 //    @Select("select * from fillquestions")
 //    public List<FillQuestion> findAllFill();
 
-    @Select("select * from selectanswers where studentid=#{userid}")
-    public List<SelectAnswer> findSelectByUser(Integer userid);
+    @Select("select * from selectanswers where studentid=#{userid} and paperid=#{paperid}")
+    public List<SelectAnswer> findSelectByUserAndPaper(Integer userid, Integer paperid);
 
-    @Select("select * from fillanswers where studentid=#{userid}")
-    public List<FillAnswer> findFillByUser(Integer userid);
+    @Select("select * from selectanswers,selectquestions where selectanswers.paperid=selectquestions.paperid and selectanswers.answer=selectquestions.answer and selectanswers.studentid=#{userid} and selectanswers.paperid=#{paperid}")
+    public List<SelectAnswer> findCorrectSelectByUserAndPaper(Integer userid, Integer paperid);
+
+    @Select("select * from fillanswers where studentid=#{userid} and paperid=#{paperid}")
+    public List<FillAnswer> findFillByUserAndPaper(Integer userid, Integer paperid);
 
     /**
      * 根据id更新考试信息

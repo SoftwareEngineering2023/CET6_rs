@@ -43,12 +43,15 @@ public class AnswerService {
         return answerDao.saveFill(a);
     }
 
-    public List<SelectAnswer> findSelectByUser(Integer userid) {
-        return answerDao.findSelectByUser(userid);
+    public List<SelectAnswer> findSelectByUserAndPaper(Integer userid, Integer paperid) {
+        return answerDao.findSelectByUserAndPaper(userid, paperid);
+    }
+    public List<SelectAnswer> findCorrectSelectByUserAndPaper(Integer userid, Integer paperid) {
+        return answerDao.findCorrectSelectByUserAndPaper(userid, paperid);
     }
 
-    public List<FillAnswer> findFillByUser(Integer userid) {
-        return answerDao.findFillByUser(userid);
+    public List<FillAnswer> findFillByUserAndPaper(Integer userid, Integer paperid) {
+        return answerDao.findFillByUserAndPaper(userid, paperid);
     }
 
 //    public Paper findById(Integer id){
