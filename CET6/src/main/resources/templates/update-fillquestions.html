@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="common/header::header('社会考试信息')"></div>
+
+<body onload="getTime()">
+<div id="wrapper" class="row">
+    <div th:replace="common/header::nav"></div>
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        试卷题目录入
+                    </div>
+                    <div class="panel-body">
+                        <form action="/erems/manager/saveFillQuestion" method="post">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:40%;"></th>
+                                        <th>填空题信息</th>
+                                    </tr>
+                                    </thead>
+                                    <th:block>
+                                        <tbody th:object="${currentPaper}">
+                                            <input type="hidden" id="fillpaperid" name="paperid" th:value="*{id}"/>
+                                        </tbody>
+                                        <tbody>
+                                        <tr>
+                                            <td>题目</td>
+                                            <td>
+                                                <textarea id="fillquestion" name="question" class="required" placeholder="题目" rows="5"
+                                                          th:text="*{fillquestion}"></textarea>
+                                                <input type="hidden" id="fillid" name="id" th:value="*{id}"/>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>正确答案</td>
+                                            <td>
+                                                <textarea id="answer" name="answer" class="required" placeholder="请输入正确答案" rows="5"
+                                                          th:text="*{answer}"></textarea>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </th:block>
+                                </table>
+                                <button type="submit" class="btn btn-primary">保存</button>
+                                <button class="btn btn-warning">
+                                    <a th:href="'/erems/manager/paperlist'" style="color:white;">取消</a>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /. PAGE INNER  -->
+</div>
+<!-- /. WRAPPER  -->
+
+<div th:replace="common/footer"></div>
+<script>
+    $('#datetimepicker').datetimepicker();
+</script>
+</body>
+</html>

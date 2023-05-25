@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="common/header::header('社会考试信息')"></div>
+
+<body onload="getTime()">
+<div id="wrapper" class="row">
+  <div th:replace="common/header::nav"></div>
+  <div id="page-inner">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            试卷题目录入
+          </div>
+          <div class="panel-body">
+            <form action="/erems/manager/confirmSelection" method="post">
+
+              <tbody th:object="${currentPaper}">
+                <div>
+                  <input id="选择题" name="Qtype" type="radio" value="0" th:checked="${Qtype==0}"/>
+                  <label for="选择题">选择题</label>
+                  <input id="填空题" name="Qtype" type="radio" value="1" th:checked="${Qtype==1}"/>
+                  <label for="填空题">填空题</label>
+                  <input type="hidden" id="paperid" name="paperid" th:value="*{id}"/>
+                </div>
+              </tbody>
+
+              <button type="submit" class="btn btn-primary">点击确认</button>
+              <button class="btn btn-warning">
+                <a th:href="'/erems/manager/paperlist'" style="color:white;">取消</a>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /. PAGE INNER  -->
+</div>
+<!-- /. WRAPPER  -->
+
+<div th:replace="common/footer"></div>
+<script>
+    $('#datetimepicker').datetimepicker();
+</script>
+</body>
+</html>
