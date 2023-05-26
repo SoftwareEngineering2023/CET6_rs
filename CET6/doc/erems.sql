@@ -55,7 +55,7 @@ CREATE TABLE `exam` (
   `description` varchar(3000) DEFAULT '描述' COMMENT '考试信息描述',
   `time` datetime DEFAULT NULL COMMENT '考试时间',
   `outed` tinyint(2) DEFAULT '0' COMMENT '过期标志，0未过期，1过期',
-  PRIMARY KEY (`id`)user
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
