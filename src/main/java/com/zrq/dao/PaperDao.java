@@ -18,6 +18,9 @@ public interface PaperDao {
     @Select("select * from paper, mypaper where paper.id=mypaper.paperid and userid = #{userid} and mypaper.outed=0")
     public List<Paper> findAllmy(Integer userid);
 
+    @Select("select * from paper, mypaper where paper.id=mypaper.paperid and userid = #{userid} and mypaper.outed=0 and mypaper.pay=#{pay}")
+    public List<Paper> findAllmyPay(Integer userid, Integer pay);
+
     @Select("select * from paper, mypaper where paper.id=mypaper.paperid and userid = #{userid} and mypaper.outed=1 and score is not NULL")
     public List<MyPaper> findAllMyScored(Integer userid);
 

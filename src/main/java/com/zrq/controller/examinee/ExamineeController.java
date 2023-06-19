@@ -189,6 +189,8 @@ public class ExamineeController extends BaseController{
         return "my-exam";
     }
 
+
+
     /**
      * 跳转考试查询页面
      * @param request
@@ -318,6 +320,11 @@ public class ExamineeController extends BaseController{
         return "my-paper";
     }
 
+    @RequestMapping("video_display")
+    public  String video_display(){
+        return "video_display";
+    }
+
     /**
      * 返回任何路径对应页面
      * 如果未定义方法会默认使用该方法
@@ -331,4 +338,6 @@ public class ExamineeController extends BaseController{
         System.out.println("MyPagedefault-all:"+url);
         return url;
     }
+
+
 }

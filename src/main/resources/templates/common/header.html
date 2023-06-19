@@ -38,7 +38,7 @@
 <div id="nav" th:fragment="nav">
     <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/erems/res/assets/index">考试报名及考务管理系统</a>
+            <a class="navbar-brand" href="/erems/res/assets/index">英语四六级考试报名系统</a>
         </div>
 
         <div class="header-right">
@@ -83,14 +83,25 @@
                 <!--考生个人导航条-->
                 <th:block th:if="${session.user.role}==2">
 <!--                    hyx关掉社会考试信息导航-->
+<!--                <li>-->
+<!--                    <a href="#"><i class="fa fa-desktop "></i>社会考试信息<span class="fa arrow"></span></a>-->
+<!--                    <ul class="nav nav-second-level">-->
+<!--                        <li>-->
+<!--                            <a href="/erems/exam/list"><i class="fa fa-toggle-on"></i>考试列表</a>-->
+<!--                        </li>-->
+<!--                        &lt;!&ndash;<li>&ndash;&gt;-->
+<!--                            &lt;!&ndash;<a onclick="change('admin/notification')"><i class="fa fa-bell "></i>Notifications</a>&ndash;&gt;-->
+<!--                        &lt;!&ndash;</li>&ndash;&gt;-->
+<!--                    </ul>-->
+<!--                </li>-->
                 <li>
-                    <a href="#"><i class="fa fa-desktop "></i>社会考试信息<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-desktop "></i>相关资源<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="/erems/exam/list"><i class="fa fa-toggle-on"></i>考试列表</a>
+                            <a href="/erems/examinee/video_display"><i class="fa fa-toggle-on"></i>教学视频</a>
                         </li>
                         <!--<li>-->
-                            <!--<a onclick="change('admin/notification')"><i class="fa fa-bell "></i>Notifications</a>-->
+                        <!--<a onclick="change('admin/notification')"><i class="fa fa-bell "></i>Notifications</a>-->
                         <!--</li>-->
                     </ul>
                 </li>
@@ -109,20 +120,34 @@
                 <!--<li>-->
                     <!--<a href="exam/signup"><i class="fa fa-anchor "></i>考试报名</a>-->
                 <!--</li>-->
-                <li>
-                    <a href="#"><i class="fa fa-yelp "></i>社会考试管理<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="/erems/examinee/examList?pay=0"><i class="fa fa-coffee"></i>待缴费</a>
-                        </li>
-                        <li>
-                            <a href="/erems/examinee/examList?pay=1"><i class="fa fa-coffee"></i>已缴费</a>
-                        </li>
-                        <li>
-                            <a href="/erems/examinee/examList?pay=1&examed=0"><i class="fa fa-coffee"></i>已考</a>
-                        </li>
-                    </ul>
-                </li>
+<!--                <li>-->
+<!--                    <a href="#"><i class="fa fa-yelp "></i>社会考试管理<span class="fa arrow"></span></a>-->
+<!--                    <ul class="nav nav-second-level">-->
+<!--                        <li>-->
+<!--                            <a href="/erems/examinee/examList?pay=0"><i class="fa fa-coffee"></i>待缴费</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="/erems/examinee/examList?pay=1"><i class="fa fa-coffee"></i>已缴费</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="/erems/examinee/examList?pay=1&examed=0"><i class="fa fa-coffee"></i>已考</a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <a href="#"><i class="fa fa-yelp "></i>社会考试管理<span class="fa arrow"></span></a>-->
+<!--                    <ul class="nav nav-second-level">-->
+<!--                        <li>-->
+<!--                            <a href="/erems/examinee/mypaperList?pay=0"><i class="fa fa-coffee"></i>待缴费</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="/erems/examinee/mypaperList?pay=1"><i class="fa fa-coffee"></i>已缴费</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="/erems/examinee/mypaperList?pay=1&examed=0"><i class="fa fa-coffee"></i>已考</a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </li>-->
                 <li>
                     <a href="#"><i class="fa fa-bicycle "></i>线上答卷 <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">

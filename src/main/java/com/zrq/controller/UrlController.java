@@ -81,7 +81,7 @@ public class UrlController extends BaseController{
      * @return
      */
     @RequestMapping("validate")
-    public String validate(User user, @RequestParam(required = false) String role, Map<String,Object> map){
+    public String validate(HttpServletRequest request, User user, @RequestParam(required = false) String role, Map<String,Object> map){
         User existUser=loginService.findUser(user);
         if(existUser!=null) {
             existUser.setPassword("");
@@ -90,6 +90,7 @@ public class UrlController extends BaseController{
 //                existUser.setPerimage(tempPath);
 //            }
             map.put("user",existUser);//map用于给前端传数据
+            request.getSession().setAttribute("currentExaminee", user);
             return "redirect:"+path+"/home";//重定向？到path/home （path是啥沒找到
         }
         map.put("msg","用户名或密码错误");

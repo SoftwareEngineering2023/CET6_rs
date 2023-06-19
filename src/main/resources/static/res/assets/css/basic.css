@@ -2,6 +2,7 @@
 /*==============================================
     BASIC  STYLES    
     =============================================*/
+/*
 body {
     font-family: 'Open Sans', sans-serif;
     line-height:25px;
@@ -58,6 +59,69 @@ body {
     font-size:0;
     overflow:hidden;
 }
+*/
+/*==============================================
+    BASIC  STYLES
+    =============================================*/
+body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 25px;
+    color: rgba(38, 37, 37, 0.67); /* Dark grey for body text */
+}
+
+#wrapper {
+    width: 100%;
+    background: #f5f5f5; /* Light grey for main background */
+    padding: 0 0 0 260px;
+    margin: auto;overflow-x: hidden;
+}
+
+#nav{
+    margin: 0 0 0 -260px;
+}
+
+#page-wrapper {
+    padding: 15px 15px;
+    min-height: 600px;
+    background: #ffffff; /* White for secondary container */
+}
+
+#page-inner {
+    width: 100%;
+    background-color: #ffffff!important; /* White for main content area */
+    padding: 10px;
+    min-height: 1200px;
+}
+
+.page-head-line {
+    font-size: 30px;
+    text-transform: uppercase;
+    color: rgba(38, 37, 37, 0.67); /* Dark grey for headings */
+    font-weight: 800;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(0, 238, 238, 0.08); /* Bright blue for emphasis elements */
+    margin-bottom: 10px;
+}
+
+.page-subhead-line {
+    font-size: 14px;
+    padding-top: 5px;
+    padding-bottom: 20px;
+    font-style:italic;
+    margin-bottom: 30px;
+    border-bottom:1px dashed rgba(0, 238, 238, 0.08); /* Border style change to match headings */
+
+}
+
+.copyrights{
+    text-indent:-9999px;
+    height:0;
+    line-height:0;
+    font-size:0;
+    overflow:hidden;
+}
+
+
 /*==============================================
     MENU STYLES
     =============================================*/
@@ -65,7 +129,7 @@ body {
 
 .navbar-cls-top .navbar-brand {
     color: #fff;
-    background: #202020;
+    background: rgba(38, 37, 37, 0.67);
     width: 260px;
     text-align: center;
     height: 75px;
@@ -84,14 +148,14 @@ body {
 }
 
 .navbar-cls-top .navbar-brand:hover {
-    background: #202020;
+    background: rgba(38, 37, 37, 0.67);
     color: #fff;
 }
 
 .user-img-div {
     min-height: 140px;
     padding: 20px;
-    background-color: #4380B8;
+    background-color: rgba(197, 197, 197, 0.76);
 }
 
 .user-img-div img {
@@ -107,10 +171,10 @@ body {
 }
 
 .active-menu {
-    background-color: #00CA79!important;
+    background-color: rgba(38, 37, 37, 0.67) !important;
 }
 .active-menu-top {
-    background-color: #000!important;
+    background-color: rgba(38, 37, 37, 0.67) !important;
 }
 
 .arrow {
@@ -149,10 +213,10 @@ body {
 
 .sidebar-collapse .nav > li > a {
     color: #fff;
-    background: #202020;
+    background: rgba(38, 37, 37, 0.67);
     text-shadow: none;
     padding: 15px 40px;
-    border-bottom: 1px solid #2F2E31;
+    border-bottom: 1px solid rgba(38, 37, 37, 0.67);
 }
 
 .sidebar-collapse > .nav > li > a {
@@ -161,7 +225,7 @@ body {
 
 .sidebar-collapse .nav > li > a:hover,
 .sidebar-collapse .nav > li > a:focus {
-    background: #0A0A0A;
+    background: rgba(38, 37, 37, 0.67);
     outline: 0;
 }
 
@@ -179,25 +243,25 @@ body {
 
 .navbar-side {
     border: none;
-    background-color: #202020;
+    background-color: rgba(38, 37, 37, 0.67);
 }
 
 .navbar-cls-top {
-    background: #00CA79;
+    background: rgba(38, 37, 37, 0.67);
     border-bottom: none;
 }
 
 
 .navbar-default {
-    border: 0px solid black;
+    border: 0px solid rgba(38, 37, 37, 0.67);
 }
 
 .navbar-header {
-    background: #000000;
+    background: rgba(38, 37, 37, 0.67);
 }
 
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-    background-color: #00CA79;
+    background-color: rgba(38, 37, 37, 0.67);
 }
 
 .navbar-default .navbar-toggle {
@@ -215,7 +279,7 @@ body {
     FOOTER  STYLES
     =============================================*/
 #footer-sec {
-    background-color:#000;
+    background-color: rgba(38, 37, 37, 0.67);
     padding:20px 50px;
     color:#fff;
     font-size:12px;

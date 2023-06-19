@@ -56,7 +56,7 @@ public interface ExamineeDao{
     })
     public MyExam findByUserAndExam(@Param("userId") Integer userId, @Param("examId") Integer examId);
 
-    @Select("select * from mypaper where userid=#{userid} and paperid=#{paperid}")
+    @Select("select * from mypaper where userid=#{userid} and paperid=#{paperid} and pay=0 and outed=0")
     public MyPaper findByUserAndPaper(@Param("userid") Integer userid, @Param("paperid") Integer paperid);
 
     @Update("update mypaper set outed=1 where userid=#{userid} and paperid=#{paperid}")

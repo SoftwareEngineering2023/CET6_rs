@@ -1,0 +1,141 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en"-->
+<!--      xmlns="http://www.w3.org/1999/xhtml"-->
+<!--      xmlns:th="http://www.thymeleaf.org">-->
+<!--<div th:replace="common/header::header('相关资源')"></div>-->
+<!--<div th:replace="common/header::nav"></div>-->
+<!--<head>-->
+<!--    <title>B站视频展示</title>-->
+<!--    <style>-->
+<!--    body {-->
+<!--      font-family: Arial, sans-serif;-->
+<!--      margin: 0;-->
+<!--      padding: 0;-->
+<!--    }-->
+
+<!--    .video-container {-->
+<!--      display: flex;-->
+<!--      flex-wrap: wrap;-->
+<!--      justify-content: center;-->
+<!--    }-->
+
+<!--    .video-card {-->
+<!--      width: 300px;-->
+<!--      margin: 10px;-->
+<!--      padding: 10px;-->
+<!--      border: 1px solid #ccc;-->
+<!--      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);-->
+<!--    }-->
+
+<!--    .video-card img {-->
+<!--      width: 100%;-->
+<!--      height: auto;-->
+<!--    }-->
+
+<!--    .video-card .title {-->
+<!--      font-weight: bold;-->
+<!--      margin-top: 10px;-->
+<!--    }-->
+
+<!--    .video-card .description {-->
+<!--      margin-top: 5px;-->
+<!--      color: #555;-->
+<!--    }-->
+<!--  </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="video-container">-->
+<!--    <a href="https://www.bilibili.com/video/BV1Dk4y1q781/?spm_id_from=333.337.search-card.all.click">-->
+<!--        <div class="video-card">-->
+<!--            <img src="/erems/res/img/video1.jpg" alt="视频1">-->
+<!--            <div class="title">视频标题1</div>-->
+<!--            <div class="description">视频描述1</div>-->
+<!--        </div>-->
+<!--    </a>-->
+<!--    <a href="https://www.bilibili.com/video/BV1SZ4y1K7Lr/?spm_id_from=333.337.search-card.all.click">-->
+<!--        <div class="video-card">-->
+<!--            <img src="/erems/res/img/video2.jpg" alt="视频2">-->
+<!--            <div class="title">视频标题2</div>-->
+<!--            <div class="description">视频描述2</div>-->
+<!--        </div>-->
+<!--    </a>-->
+<!--    &lt;!&ndash; 添加更多视频卡片 &ndash;&gt;-->
+<!--</div>-->
+
+<!--<div th:replace="common/footer"></div>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="common/header::header('个人主页')"></div>
+<body style="background-color: rgba(197,197,197,0.76);">
+<div id="wrapper" class="row">
+    <div th:replace="common/header::nav"></div>
+    <head>
+        <title>B站视频展示</title>
+        <style>
+            body {
+              font-family: Arial, sans-serif;
+              margin: 0;
+              padding: 0;
+            }
+
+            .video-container {
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: center;
+            }
+
+            .video-card {
+              width: 300px;
+              margin: 10px;
+              padding: 10px;
+              border: 1px solid #ccc;
+              box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .video-card img {
+              width: 100%;
+              height: auto;
+            }
+
+            .video-card .title {
+              font-weight: bold;
+              margin-top: 10px;
+            }
+
+            .video-card .description {
+              margin-top: 5px;
+              color: #555;
+            }
+        </style>
+    </head>
+    <div class="video-container" style="margin:20%;">
+        <a href="https://www.bilibili.com/video/BV1Dk4y1q781/?spm_id_from=333.337.search-card.all.click">
+            <div class="video-card">
+                <img src="/erems/res/img/video1.jpg" alt="视频1">
+                <div class="title">视频标题1</div>
+                <div class="description">视频描述1</div>
+            </div>
+        </a>
+        <a href="https://www.bilibili.com/video/BV1SZ4y1K7Lr/?spm_id_from=333.337.search-card.all.click">
+            <div class="video-card">
+                <img src="/erems/res/img/video2.jpg" alt="视频2">
+                <div class="title">视频标题2</div>
+                <div class="description">视频描述2</div>
+            </div>
+        </a>
+        <!-- 添加更多视频卡片 -->
+    </div>
+    <!-- /. PAGE INNER  -->
+</div>
+<!-- /. WRAPPER  -->
+
+<div th:replace="common/footer" style="margin-top: 20px;"></div>
+</body>
+</html>
+
+

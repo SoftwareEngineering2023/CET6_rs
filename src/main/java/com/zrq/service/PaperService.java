@@ -26,6 +26,12 @@ public class PaperService {
         return paperDao.findAllmy(userid);
     }
 
+    public List<Paper> findAllmyPay(Integer userid, Integer pay){
+//        System.out.println("findAll");
+        return paperDao.findAllmyPay(userid, pay);
+    }
+
+
     public List<User> findAllStudentByPaper(Integer paperid){
         return paperDao.findAllStudentByPaper(paperid);
     }
