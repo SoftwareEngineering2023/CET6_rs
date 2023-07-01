@@ -9,6 +9,7 @@ public class MyPaper {
     private Integer id;
     private Integer userid;
     private Integer paperid;
+    private String name="";
     private Integer score;
 //    private Integer time;
 //    private String examNum;
@@ -29,12 +30,12 @@ public class MyPaper {
         this.id = id;
     }
 
-    public Integer getUser() {
+    public Integer getUserid() {
         return userid;
     }
 
-    public void setUser(Integer user) {
-        this.userid = user;
+    public void setUserid(Integer userid) {
+        this.userid = userid;
     }
 
     public Integer getPaperid() {
@@ -43,6 +44,14 @@ public class MyPaper {
 
     public void setPaperid(Integer pid) {
         this.paperid = pid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getScore() {

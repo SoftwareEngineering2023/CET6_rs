@@ -1,9 +1,6 @@
 package com.zrq.dao.admin;
 
-import com.zrq.entity.Address;
-import com.zrq.entity.MyExam;
-import com.zrq.entity.Room;
-import com.zrq.entity.User;
+import com.zrq.entity.*;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -115,21 +112,53 @@ public interface AdminDao {
     public List<MyExam> findScoreByExam(@Param("examId") Integer examId);
 
     /**
+     * 根据某项考试（已付款）查找所有考生成绩
+     * @param examId
+     * @return
+     */
+    @Select("<script>"+
+            "select * from mypaper where pay=1" +
+            "<if test='paperId!=null and paperId != \"\"'>" +
+            "and paperid=#{paperId}" +
+            "</if>" +
+            "</script>")
+    @Results(id="user_paper",value = {
+            @Result(property="userid",
+                    column = "userid"
+            ),
+            @Result(property="paperid",
+                    column = "paperid"
+            ),
+//            @Result(property="address",
+//                    column = "address",
+//                    one = @One(select = "com.zrq.dao.admin.AdminDao.findAreaById")
+//            ),
+//            @Result(property="examNum",column = "exam_num"),
+//            @Result(property="roomNum",column = "room_num")
+    })
+    public List<MyPaper> findScoreByPaper(@Param("paperId") Integer paperId);
+    /**
      * 根据个人考试成绩项id查询单条信息
      * @param id
      * @return
      */
-    @Select("select * from myexam where id=#{id}")
-    @ResultMap("user_exam")
-    public MyExam findScoreById(Integer id);
+//    @Select("select * from myexam where id=#{id}")
+//    @ResultMap("user_exam")
+//    public MyExam findScoreById(Integer id);
+    @Select("select * from mypaper where id=#{id}")
+    @ResultMap("user_paper")
+    public MyPaper findScoreById(Integer id);
 
     /**
      * 更新个人考试成绩
      * @param myExam
      * @return
      */
-    @Update("update myexam set score=#{score} where id=#{id}")
-    public int updateScore(MyExam myExam);
+//    @Update("update myexam set score=#{score} where id=#{id}")
+//    public int updateScore(MyExam myExam);
+
+    @Update("update mypaper set score=#{score} where id=#{id}")
+    public int updateScore(MyPaper myPaper);
 
     /**
      * 批量更新考号，考室号

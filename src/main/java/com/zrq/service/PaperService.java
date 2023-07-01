@@ -20,6 +20,10 @@ public class PaperService {
 //        System.out.println("findAll");
         return paperDao.findAllMyScored(userid);
     }
+    public List<MyPaper> findAllScore(){
+//        System.out.println("findAll");
+        return paperDao.findAllScore();
+    }
 
     public List<Paper> findAllmy(Integer userid){
 //        System.out.println("findAll");

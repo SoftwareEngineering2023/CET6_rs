@@ -24,6 +24,9 @@ public interface PaperDao {
     @Select("select * from paper, mypaper where paper.id=mypaper.paperid and userid = #{userid} and mypaper.outed=1 and score is not NULL")
     public List<MyPaper> findAllMyScored(Integer userid);
 
+    @Select("select * from paper, mypaper where paper.id=mypaper.paperid and mypaper.outed=1 and score is not NULL")
+    public List<MyPaper> findAllScore();
+
     /**
      * 根据id更新考试信息
      * @param paper

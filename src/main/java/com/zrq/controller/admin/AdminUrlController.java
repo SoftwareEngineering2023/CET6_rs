@@ -2,6 +2,7 @@ package com.zrq.controller.admin;
 
 import com.zrq.entity.*;
 import com.zrq.service.ExamService;
+import com.zrq.service.PaperService;
 import com.zrq.service.admin.AdminService;
 import com.zrq.service.examinee.ExamineeService;
 import com.zrq.util.StringUtil;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +25,8 @@ import java.util.Map;
 public class AdminUrlController {
     @Autowired
     private ExamService examService;
+    @Autowired
+    private PaperService paperService;
     @Autowired
     private ExamineeService examineeService;
     @Autowired
@@ -82,9 +86,9 @@ public class AdminUrlController {
      * @return
      */
     @RequestMapping("saveScore")
-    public String saveScore(MyExam myExam,Map<String,Object> map){
-        int i=adminService.updateScore(myExam);
-        return this.searchExam(map,null,null);
+    public String saveScore(MyPaper myPaper,Map<String,Object> map){
+        int i=adminService.updateScore(myPaper);
+        return this.searchPaper(map,null,null);
     }
 
     /**
@@ -94,17 +98,39 @@ public class AdminUrlController {
      * @param id 个人单项成绩的id
      * @return
      */
-    @RequestMapping("searchExam")
-    public String searchExam(Map<String,Object> map,
+//    @RequestMapping("searchExam")
+//    public String searchExam(Map<String,Object> map,
+//                             @RequestParam(value = "sexam",required = false)Integer sexam,
+//                             @RequestParam(value = "id",required = false)Integer id){
+//        List<MyExam> scoreList=adminService.findScoreByExam(sexam);//查询所有考试或根据某项考试考生考试信息
+//        map.put("scoreList",scoreList);
+//        if(id!=null){
+//            MyExam u=adminService.findScoreById(id);
+//            map.put("currentScore",u);
+//        }
+//        return "admin/score-list";
+//    }
+    @RequestMapping("searchPaper")
+    public String searchPaper(Map<String,Object> map,
                              @RequestParam(value = "sexam",required = false)Integer sexam,
                              @RequestParam(value = "id",required = false)Integer id){
-        List<MyExam> scoreList=adminService.findScoreByExam(sexam);//查询所有考试或根据某项考试考生考试信息
+        List<MyPaper> scoreList=adminService.findScoreByPaper(sexam);//查询所有考试或根据某项考试考生考试信息
         map.put("scoreList",scoreList);
+
         if(id!=null){
-            MyExam u=adminService.findScoreById(id);
+            MyPaper u=adminService.findScoreById(id);
             map.put("currentScore",u);
         }
+
         return "admin/score-list";
+    }
+
+    @RequestMapping("getAllScore")
+    @ResponseBody
+    public List<MyPaper> getScoreRecord(HttpServletRequest request){
+//        Integer userId=((User)request.getSession().getAttribute("user")).getId();
+        List<MyPaper> scoreList=paperService.findAllScore();
+        return scoreList;
     }
 
     /**
@@ -215,23 +241,31 @@ public class AdminUrlController {
         return "admin/update-exam";
     }
 
-    @RequestMapping("examineeInfo")
-    public String examineeInfo(@RequestParam(value = "examId",required = false)Integer id,
-                               @RequestParam(value = "tag",required = false)Integer tag,
-                               Map<String,Object> map){
-        List<MyExam> examineeList=null;
-        Exam currentExam=examService.findById(id);
-        if(id!=null&&!id.equals("")){
-           examineeList=examineeService.findMyExamByExamId(id);
-        }else {
-            examineeList=examineeService.findMyExam();
-        }
-        map.put("currentExam",currentExam);
-        map.put("examineeList",examineeList);
-        if(tag!=null){
-            return "admin/create-num";
-        }
-        return "admin/examinee-info";
+//    @RequestMapping("examineeInfo")
+//    public String examineeInfo(@RequestParam(value = "examId",required = false)Integer id,
+//                               @RequestParam(value = "tag",required = false)Integer tag,
+//                               Map<String,Object> map){
+//        List<MyExam> examineeList=null;
+//        Exam currentExam=examService.findById(id);
+//        if(id!=null&&!id.equals("")){
+//           examineeList=examineeService.findMyExamByExamId(id);
+//        }else {
+//            examineeList=examineeService.findMyExam();
+//        }
+//        map.put("currentExam",currentExam);
+//        map.put("examineeList",examineeList);
+//        if(tag!=null){
+//            return "admin/create-num";
+//        }
+//        return "admin/examinee-info";
+//    }
+    @RequestMapping("list")
+    public String list(){
+    //        PageBean<Exam> examPage=paperService.findByPage(Integer.parseInt(currentPage),pageSize);
+    //        System.out.println("pageSize:"+examPage.getTotalNum()+currentPage.toString()+pageSize);
+    //        System.out.println("pageSize:"+examPage.getItems().get(1).getName());
+    //        map.put("examPage",examPage);
+        return "paperlist";
     }
 
     /**

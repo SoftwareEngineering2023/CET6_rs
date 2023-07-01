@@ -1,10 +1,7 @@
 package com.zrq.service.admin;
 
 import com.zrq.dao.admin.AdminDao;
-import com.zrq.entity.Address;
-import com.zrq.entity.MyExam;
-import com.zrq.entity.Room;
-import com.zrq.entity.User;
+import com.zrq.entity.*;
 import com.zrq.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -81,13 +78,16 @@ public class AdminService {
     public List<MyExam> findScoreByExam(Integer sexam) {
         return adminDao.findScoreByExam(sexam);
     }
+    public List<MyPaper> findScoreByPaper(Integer spaper) {
+        return adminDao.findScoreByPaper(spaper);
+    }
 
     /**
      * 根据个人考试成绩项id查询单条信息
      * @param id
      * @return
      */
-    public MyExam findScoreById(Integer id) {
+    public MyPaper findScoreById(Integer id) {
         return adminDao.findScoreById(id);
     }
 
@@ -96,8 +96,12 @@ public class AdminService {
      * @param myExam
      * @return
      */
-    public int updateScore(MyExam myExam) {
-        return adminDao.updateScore(myExam);
+//    public int updateScore(MyExam myExam) {
+//        return adminDao.updateScore(myExam);
+//    }
+
+    public int updateScore(MyPaper myPaper) {
+        return adminDao.updateScore(myPaper);
     }
 
     /**

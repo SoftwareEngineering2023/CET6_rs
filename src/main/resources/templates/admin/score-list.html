@@ -7,7 +7,7 @@
     function getExamList() {
         $.ajax({
             type: "post",
-            url: "/erems/exam/examList",    //url根据自己的项目实际定义
+            url: "/erems/paper/paperList",    //url根据自己的项目实际定义
             async: false,
             dataType: "text",
             error: function () {
@@ -33,7 +33,7 @@
     <div id="page-inner">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <form role="form" action="/erems/admin/searchExam" method="post">
+                <form role="form" action="/erems/admin/searchPaper" method="post">
                     <div class="form-group">
                         <label for="sexam">考试名</label>
                         <select id="sexam" name="sexam">
@@ -54,11 +54,11 @@
                         <tbody th:object="${currentScore}">
                             <tr>
                                 <td>
-                                    考号：<span th:text="*{examNum}"></span>
+                                    考号：<span th:text="*{id}"></span>
                                     <input type="hidden" name="id" th:value="*{id}"/>
                                 </td>
                                 <td>
-                                    姓名：<span th:text="*{user.name}"></span>
+                                    考生：<span th:text="*{userid}"></span>
                                 </td>
                                 <td>
                                     成绩：<input type="text" name="score" th:value="*{score}"/>
@@ -92,28 +92,28 @@
                         <tr>
                             <th>序号</th>
                             <th>考试</th>
-                            <th>考号</th>
-                            <th>姓名</th>
+<!--                            <th>考号</th>-->
+<!--                            <th>姓名</th>-->
                             <th>成绩</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <th:block th:if="${#lists.size(scoreList)}>0">
                         <tbody id="scoreList" th:each="s,sstatus:${scoreList}">
-                        <tr th:object="${s}" th:if="${s.examNum!=null}">
+                        <tr th:object="${s}" th:if="${s.userid!=null}">
                             <td th:text="${sstatus.count}">1</td>
-                            <td th:text="*{exam.name}">考试</td>
-                            <td th:text="*{examNum}">考号</td>
-                            <td th:text="*{user.name}">姓名</td>
+                            <td th:text="*{paperid}">考试</td>
+<!--                            <td th:text="*{userid}">考号</td>-->
+<!--                            <td th:text="*{user.name}">姓名</td>-->
                             <td th:unless="*{score<0}" th:text="*{score}">成绩</td>
                             <td th:if="*{score<0}" style="color: blue;">空</td>
                             <td>
-                                <th:block th:if="*{examNum}">
+                                <th:block >
                                     <th:block th:if="*{score<0}">
-                                        <a th:href="'/erems/admin/searchExam?id='+*{id}">给分</a>
+                                        <a th:href="'/erems/admin/searchPaper?id='+*{id}">给分</a>
                                     </th:block>
                                     <th:block th:unless="*{score<0}">
-                                        <a th:href="'/erems/admin/searchExam?id='+*{id}">更改</a>
+                                        <a th:href="'/erems/admin/searchPaper?id='+*{id}">更改</a>
                                     </th:block>
                                 </th:block>
                             </td>
@@ -139,3 +139,102 @@
 <div th:replace="common/footer"></div>
 </body>
 </html>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en"-->
+<!--      xmlns="http://www.w3.org/1999/xhtml"-->
+<!--      xmlns:th="http://www.thymeleaf.org">-->
+<!--<div th:replace="common/header::header('试卷列表')"></div>-->
+<!--<script>-->
+<!--    Date.prototype.Format = function (fmt) { //将蓝括号的这段要放在调用时间的上面，-->
+<!--        var o = {-->
+<!--            "M+": this.getMonth() + 1, //月份-->
+<!--            "d+": this.getDate(), //日-->
+<!--            "h+": this.getHours(), //小时-->
+<!--            "m+": this.getMinutes(), //分-->
+<!--            "s+": this.getSeconds(), //秒-->
+<!--            "q+": Math.floor((this.getMonth() + 3) / 3), //季度-->
+<!--            "S": this.getMilliseconds() //毫秒-->
+<!--        };-->
+<!--        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));-->
+<!--        for (var k in o)-->
+<!--            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));-->
+<!--        return fmt;-->
+<!--    }-->
+<!--    function getPaperList() {-->
+<!--        $.ajax({-->
+<!--            type: "post",-->
+<!--            url: "/erems/admin/getAllScore",    //url根据自己的项目实际定义-->
+<!--            async: false,-->
+<!--            dataType: "text",-->
+<!--            error: function () {-->
+<!--                alert("系统忙，请稍后再试！");-->
+<!--                return false;-->
+<!--            },-->
+<!--            success: function (text) {-->
+<!--                var expressPaper = $("#paperList");-->
+<!--                var str = '';-->
+<!--                var count = 1;-->
+<!--                var data = eval("(" + text + ")");-->
+<!--                expressPaper.empty();-->
+<!--                for (var o in data) {-->
+<!--                    str += '<tr>'-->
+<!--                        + '<td>' + count + '</td>'-->
+<!--                        + '<td>' + data[o].name + '</td>'-->
+<!--                        + '<td>' + data[o].userid + '</td>'-->
+<!--                        + '<td>' + data[o].score + '</td>'-->
+<!--&lt;!&ndash;                        + '<td>' +new Date(data[o].time).Format("yyyy-MM-dd hh:mm:ss")  + '</td>'&ndash;&gt;-->
+<!--                        + '<td><a href="/erems/admin/editscore?id=' + data[o].id + '" class="btn btn-primary">更改成绩</a>'-->
+<!--                        + '</tr>';-->
+<!--                    count++;-->
+<!--                }-->
+<!--                expressPaper.append(str);-->
+<!--            }-->
+<!--        });-->
+<!--    }-->
+<!--</script>-->
+<!--<body onload="getPaperList()">-->
+<!--<div id="wrapper" class="row">-->
+<!--    <div th:replace="common/header::nav"></div>-->
+<!--    <div id="page-inner">-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-12">-->
+<!--                <h1 class="page-head-line">成绩列表</h1>-->
+<!--                <h1 class="page-subhead-line">以下是当前所有试卷成绩</h1>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; /. ROW  &ndash;&gt;-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-12">-->
+<!--                <div class="table-responsive">-->
+<!--                    <table class="table table-striped table-bordered table-hover">-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                            <th>序号</th>-->
+<!--                            <th>试卷</th>-->
+<!--                            <th>考生</th>-->
+<!--                            <th>分数</th>-->
+<!--                            &lt;!&ndash;                            <th>描述</th>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            <th>操作</th>&ndash;&gt;-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody id="paperList">-->
+<!--                        &lt;!&ndash;<tr>&ndash;&gt;-->
+<!--                        &lt;!&ndash;<td>1</td>&ndash;&gt;-->
+<!--                        &lt;!&ndash;<td>2018-5-4</td>&ndash;&gt;-->
+<!--                        &lt;!&ndash;<td><a href="/erems/examinee/continuePay?id=">继续支付</a></td>&ndash;&gt;-->
+<!--                        &lt;!&ndash;</tr>&ndash;&gt;-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; /. ROW  &ndash;&gt;-->
+<!--    </div>-->
+<!--    &lt;!&ndash; /. PAGE INNER  &ndash;&gt;-->
+<!--</div>-->
+<!--&lt;!&ndash; /. WRAPPER  &ndash;&gt;-->
+
+<!--<div th:replace="common/footer"></div>-->
+<!--</body>-->
+<!--</html>-->
+
